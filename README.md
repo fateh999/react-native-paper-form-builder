@@ -5,6 +5,9 @@ React Native Paper Form Builder with inbuilt Validation, dropdown, autocomplete.
 ### Dependencies: 
 #### react-hook-form, react-native-paper
 
+### DEMO
+![](https://ibb.co/Yp0PCnd)
+
 ## Steps to install
 
 ```javascript
