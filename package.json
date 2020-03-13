@@ -1,7 +1,7 @@
 {
   "name": "react-native-paper-form-builder",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
