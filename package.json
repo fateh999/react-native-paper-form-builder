@@ -43,5 +43,8 @@
       "json",
       "node"
     ]
-  }
+  },
+  "author": "Fateh Farooqui",
+  "license": "MIT",
+  "repository": "https://github.com/fateh999/react-native-paper-form-builder.git"
 }
