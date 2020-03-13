@@ -13,7 +13,8 @@
     "outDir": "./dist",
     "target": "esnext",
     "jsx": "react-native",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@types"]
   },
   "include": ["./../src/FormBuilder.tsx"],
   "exclude": [""]
