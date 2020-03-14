@@ -1,5 +1,5 @@
 import React, {useEffect, Fragment, useState} from 'react';
-import {View, LayoutChangeEvent, ScrollView} from 'react-native';
+import {View, LayoutChangeEvent, ScrollView, Platform} from 'react-native';
 import {Controller, ValidationOptions} from 'react-hook-form';
 import {TextInputProps} from 'react-native-paper/lib/typescript/src/components/TextInput/TextInput';
 import {Theme} from 'react-native-paper/lib/typescript/src/types';
@@ -12,6 +12,10 @@ import {
   Subheading,
   Divider,
   Searchbar,
+  Checkbox,
+  List,
+  RadioButton,
+  Switch,
 } from 'react-native-paper';
 
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
@@ -21,13 +25,13 @@ type OptionalThemeType = {
 
 export type FormConfigType = {
   name: string;
-  type: 'input' | 'select' | 'autocomplete';
+  type: 'input' | 'select' | 'autocomplete' | 'checkbox' | 'radio' | 'switch';
   variant?: 'outlined' | 'flat';
   options?: Array<{
     value: string | number;
     label: string;
   }>;
-  label?: string;
+  label?: string | React.ReactNode;
   rules?: ValidationOptions;
   textInputProps?: Without<TextInputProps, 'theme'> | OptionalThemeType;
 };
@@ -69,6 +73,17 @@ function FormBuilder(props: FormBuilderPropType) {
       propsInput.triggerValidation = form.triggerValidation;
     }
 
+    if (
+      input.type === 'checkbox' ||
+      input.type === 'radio' ||
+      input.type === 'switch'
+    ) {
+      propsInput.name = input.name;
+      propsInput.setValue = form.setValue;
+      propsInput.watch = form.watch;
+      propsInput.triggerValidation = form.triggerValidation;
+    }
+
     switch (input.type) {
       case 'input': {
         return <TextInput {...propsInput} />;
@@ -78,6 +93,15 @@ function FormBuilder(props: FormBuilderPropType) {
       }
       case 'autocomplete': {
         return <AppDropdown {...propsInput} autocomplete />;
+      }
+      case 'checkbox': {
+        return <AppCheckbox {...propsInput} />;
+      }
+      case 'radio': {
+        return <AppCheckbox {...propsInput} radio />;
+      }
+      case 'switch': {
+        return <AppSwitch {...propsInput} radio />;
       }
       default: {
         return <TextInput {...propsInput} />;
@@ -158,6 +182,10 @@ function AppDropdown(props: any) {
     }
   }, [searchValue]);
 
+  useEffect(() => {
+    if (searchValue.trim()) setSearchValue('');
+  }, [showDropdown]);
+
   return (
     <Menu
       style={{marginTop: autocomplete ? 0 : height + 10}}
@@ -216,6 +244,64 @@ function AppDropdown(props: any) {
         </Fragment>
       </ScrollView>
     </Menu>
+  );
+}
+
+function AppCheckbox(props: any) {
+  const {colors} = useTheme();
+  const [statusValue, setStatusValue] = useState(
+    Platform.OS === 'ios' ? 'indeterminate' : 'unchecked',
+  );
+  const {setValue, name, watch, triggerValidation, label, error, radio} = props;
+
+  useEffect(() => {
+    triggerValidation(name);
+    if (watch(name) === false) {
+      return setStatusValue(
+        Platform.OS === 'ios' ? 'indeterminate' : 'unchecked',
+      );
+    } else {
+      return setStatusValue('checked');
+    }
+  }, [watch(name)]);
+
+  const Input = radio && Platform.OS === 'android' ? RadioButton : Checkbox;
+
+  return (
+    <List.Item
+      title={label}
+      left={innerProps => (
+        <Input
+          status={statusValue}
+          {...props}
+          {...innerProps}
+          color={error ? colors.error : colors.primary}
+          onPress={() => setValue(name, !watch(name))}
+        />
+      )}></List.Item>
+  );
+}
+
+function AppSwitch(props: any) {
+  const {colors} = useTheme();
+  const {setValue, name, watch, triggerValidation, label, error} = props;
+
+  useEffect(() => {
+    triggerValidation(name);
+  }, [watch(name)]);
+
+  return (
+    <List.Item
+      title={label}
+      right={innerProps => (
+        <Switch
+          value={watch(name)}
+          {...props}
+          {...innerProps}
+          color={error ? colors.error : colors.primary}
+          onValueChange={value => setValue(name, value)}
+        />
+      )}></List.Item>
   );
 }
 

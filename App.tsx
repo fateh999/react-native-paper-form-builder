@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import FormBuilder from './compiled/dist/FormBuilder';
+import FormBuilder from './src/FormBuilder';
 import {useForm} from 'react-hook-form';
-import {View, SafeAreaView, ScrollView} from 'react-native';
+import {View, SafeAreaView, ScrollView, Text, Linking} from 'react-native';
 import {
   Appbar,
   Title,
@@ -11,6 +11,7 @@ import {
   DarkTheme,
   Surface,
   DefaultTheme,
+  useTheme,
 } from 'react-native-paper';
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
       password: '12345678',
       gender: 'male',
       city: 1,
+      terms: false,
+      showNotifications: true,
+      rememberMe: true,
     },
     mode: 'onChange',
   });
@@ -77,7 +81,6 @@ function App() {
                     },
                     textInputProps: {
                       keyboardType: 'default',
-                      mode: 'outlined',
                     },
                   },
                   {
@@ -98,7 +101,6 @@ function App() {
                     textInputProps: {
                       keyboardType: 'email-address',
                       autoCapitalize: 'none',
-                      mode: 'outlined',
                     },
                   },
                   {
@@ -124,7 +126,6 @@ function App() {
                     textInputProps: {
                       keyboardType: 'default',
                       secureTextEntry: true,
-                      mode: 'outlined',
                     },
                   },
                   {
@@ -147,10 +148,6 @@ function App() {
                         value: true,
                         message: 'Gender is required',
                       },
-                    },
-                    textInputProps: {
-                      keyboardType: 'default',
-                      mode: 'outlined',
                     },
                   },
                   {
@@ -198,9 +195,43 @@ function App() {
                         message: 'City is required',
                       },
                     },
-                    textInputProps: {
-                      keyboardType: 'default',
-                      mode: 'outlined',
+                  },
+                  {
+                    name: 'showNotifications',
+                    type: 'switch',
+                    label: 'Enable Push Notifications',
+                  },
+                  {
+                    name: 'rememberMe',
+                    type: 'radio',
+                    label: 'Remember Me',
+                  },
+                  {
+                    name: 'terms',
+                    type: 'checkbox',
+                    label: (
+                      <Text>
+                        Accept{' '}
+                        <Text
+                          style={{
+                            color: nightMode
+                              ? DarkTheme.colors.primary
+                              : DefaultTheme.colors.primary,
+                          }}
+                          onPress={() =>
+                            Linking.openURL(
+                              'https://github.com/fateh999/react-native-paper-form-builder',
+                            )
+                          }>
+                          Terms & Conditions
+                        </Text>
+                      </Text>
+                    ),
+                    rules: {
+                      pattern: {
+                        value: /true/,
+                        message: 'You need to accept Terms & Conditions',
+                      },
                     },
                   },
                 ]}

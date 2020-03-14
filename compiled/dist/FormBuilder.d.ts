@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { ValidationOptions } from 'react-hook-form';
 import { TextInputProps } from 'react-native-paper/lib/typescript/src/components/TextInput/TextInput';
 import { Theme } from 'react-native-paper/lib/typescript/src/types';
@@ -8,13 +8,13 @@ declare type OptionalThemeType = {
 };
 export declare type FormConfigType = {
     name: string;
-    type: 'input' | 'select' | 'autocomplete';
+    type: 'input' | 'select' | 'autocomplete' | 'checkbox' | 'radio' | 'switch';
     variant?: 'outlined' | 'flat';
     options?: Array<{
         value: string | number;
         label: string;
     }>;
-    label?: string;
+    label?: string | React.ReactNode;
     rules?: ValidationOptions;
     textInputProps?: Without<TextInputProps, 'theme'> | OptionalThemeType;
 };
