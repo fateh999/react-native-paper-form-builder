@@ -12,7 +12,7 @@ npm i react-native-paper react-hook-form react-native-vector-icons
 ```
 
 ### DEMO
-![](https://i.ibb.co/zbpnPbh/ezgif-7-46fba06cab50.gif)
+![](https://i.ibb.co/CHwmKJN/ezgif-1-894da084218f.gif)
 
 ## Steps to install
 
