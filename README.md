@@ -5,6 +5,8 @@ React Native Paper Form Builder with inbuilt Validation, dropdown, autocomplete.
 ### Dependencies: 
 #### react-hook-form, react-native-paper and react-native-vector-icons
 
+Follow the configuration step of react-native-vector-icons as provided in the docs.
+
 ```javascript
 npm i react-native-paper react-hook-form react-native-vector-icons
 ```
