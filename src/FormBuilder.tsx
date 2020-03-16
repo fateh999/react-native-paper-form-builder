@@ -1,8 +1,6 @@
 import React, {useEffect, Fragment, useState} from 'react';
 import {View, LayoutChangeEvent, ScrollView, Platform} from 'react-native';
 import {Controller, ValidationOptions} from 'react-hook-form';
-import {TextInputProps} from 'react-native-paper/lib/typescript/src/components/TextInput/TextInput';
-import {Theme} from 'react-native-paper/lib/typescript/src/types';
 import {
   TextInput,
   HelperText,
@@ -19,9 +17,6 @@ import {
 } from 'react-native-paper';
 
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
-type OptionalThemeType = {
-  theme?: Theme;
-};
 
 export type FormConfigType = {
   name: string;
@@ -33,7 +28,7 @@ export type FormConfigType = {
   }>;
   label?: string | React.ReactNode;
   rules?: ValidationOptions;
-  textInputProps?: Without<TextInputProps, 'theme'> | OptionalThemeType;
+  textInputProps?: React.ComponentProps<typeof TextInput>;
 };
 
 export type FormConfigArrayType = Array<
