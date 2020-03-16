@@ -110,3 +110,85 @@ export default BasicExample;
 ```
 
 #### For More Advanced Example as in the Demo check [App.tsx](https://github.com/fateh999/react-native-paper-form-builder/blob/master/App.tsx)
+
+#### Props:
+
+| Name            | Description                                                                                  |
+| --------------- | -------------------------------------------------------------------------------------------- |
+| formConfigArray | Array of Input Configs which are specified below                                             |
+| form            | useForm hook value                                                                           |
+| children        | (Optional) React Component For Showing Buttons or any other component at the end of the form |  | children | Optional React Component For Showing Buttons or any other component at the end of the form |
+
+#### How to generate different input types:
+
+1.  TextInput
+
+```javascript
+	{
+		type:  'input',
+		name:  string, // Same as defined in default values
+		label?:  string,
+		variant?: 'outlined'  |  'flat',
+		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+		textInputProps?: React.ComponentProps<typeof  TextInput> // Props of React Native Paper TextInput
+	}
+```
+
+2.  Select
+
+```javascript
+	{
+		type:  'select',
+		name:  string, // Same as defined in default values
+		options:  Array<{ value: string | number,label: string }>,
+		label?:  string,
+		variant?: 'outlined'  |  'flat',
+		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+	}
+```
+
+3.  Autocomplete
+
+```javascript
+	{
+		type:  'autocomplete',
+		name:  string, // Same as defined in default values
+		options:  Array<{ value: string | number,label: string }>,
+		label?:  string,
+		variant?: 'outlined'  |  'flat',
+		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+	}
+```
+
+4.  Checkbox
+
+```javascript
+	{
+		type:  'checkbox',
+		name:  string, // Same as defined in default values
+		label?:  string | React.ReactNode,
+		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+	}
+```
+
+5.  Radio
+
+```javascript
+	{
+		type:  'radio',
+		name:  string, // Same as defined in default values
+		label?:  string | React.ReactNode,
+		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+	}
+```
+
+6. Switch
+
+```javascript
+	{
+		type:  'switch',
+		name:  string, // Same as defined in default values
+		label?:  string | React.ReactNode,
+		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+	}
+```
