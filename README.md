@@ -192,3 +192,9 @@ export default BasicExample;
 		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
 	}
 ```
+
+#### TODO :
+
+- Modal Autocomplete
+- Custom Input
+- Input Icons
