@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useState } from 'react';
-import { View, ScrollView, Platform } from 'react-native';
+import { View, ScrollView, Platform, Keyboard, } from 'react-native';
 import { Controller } from 'react-hook-form';
 import { TextInput, HelperText, useTheme, Menu, TouchableRipple, Subheading, Divider, Searchbar, Checkbox, List, RadioButton, Switch, Modal, Portal, Surface, IconButton, } from 'react-native-paper';
 //@ts-ignore
@@ -104,7 +104,10 @@ function AppDropdown(props) {
             setSearchValue('');
     }, [showDropdown]);
     return (<Menu style={{ marginTop: height + 10 }} visible={showDropdown} contentStyle={{ width }} onDismiss={() => setShowDropdown(false)} anchor={<Fragment>
-          <TouchableRipple onPress={() => setShowDropdown(true)}>
+          <TouchableRipple onPress={() => {
+        Keyboard.dismiss();
+        setShowDropdown(true);
+    }}>
             <TextInput onLayout={(ev) => {
         setWidth(ev.nativeEvent.layout.width);
         setHeight(ev.nativeEvent.layout.height);
@@ -161,7 +164,10 @@ function AppAutocomplete(props) {
             setSearchValue('');
     }, [showDropdown]);
     return (<Fragment>
-      <TouchableRipple onPress={() => setShowDropdown(true)}>
+      <TouchableRipple onPress={() => {
+        Keyboard.dismiss();
+        setShowDropdown(true);
+    }}>
         <TextInput mode={mode} editable={false} pointerEvents={'none'} {...props} value={displayValue}/>
       </TouchableRipple>
       <Portal>
