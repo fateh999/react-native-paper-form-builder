@@ -195,6 +195,6 @@ export default BasicExample;
 
 #### TODO :
 
-- Modal Autocomplete
+- ~~Modal Autocomplete~~
 - Custom Input
 - Input Icons
