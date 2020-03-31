@@ -1,7 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, Fragment} from 'react';
 import FormBuilder from './src/FormBuilder';
 import {useForm} from 'react-hook-form';
-import {View, SafeAreaView, ScrollView, Text, Linking} from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  Linking,
+  TextInput,
+} from 'react-native';
 import {
   Appbar,
   Title,
@@ -11,11 +18,55 @@ import {
   DarkTheme,
   Surface,
   DefaultTheme,
+  useTheme,
+  List,
+  Switch,
+  IconButton,
 } from 'react-native-paper';
 import KeyboardSpacer from './src/KeyboardSpacer';
+import {TextInputProps} from 'react-native-paper/lib/typescript/src/components/TextInput/TextInput';
+
+function CustomTextInput(props: TextInputProps | any) {
+  const Theme = useTheme();
+  const {error} = props;
+
+  return (
+    <View
+      style={{
+        backgroundColor: Theme.colors.surface,
+        borderRadius: 30,
+        height: 60,
+        justifyContent: 'center',
+        borderWidth: 2,
+        borderColor: error ? Theme.colors.error : Theme.colors.placeholder,
+      }}>
+      {props.options && (
+        <IconButton
+          icon={'menu-down'}
+          size={32}
+          style={{right: 0, top: 0, bottom: 0, position: 'absolute'}}
+        />
+      )}
+      <TextInput
+        {...props}
+        style={{
+          color: Theme.colors.onSurface,
+          paddingLeft: 25,
+          paddingRight: 25,
+          height: 56,
+          ...props.style,
+        }}
+        placeholder={props.label}
+        placeholderTextColor={Theme.colors.placeholder}
+      />
+    </View>
+  );
+}
 
 function App() {
   const [nightMode, setNightmode] = useState(false);
+  const [showCustomInput, setShowCustomInput] = useState(false);
+
   const form = useForm({
     defaultValues: {
       name: 'Test User',
@@ -66,9 +117,26 @@ function App() {
             <ScrollView
               style={{flex: 1, padding: 20}}
               keyboardShouldPersistTaps={'handled'}>
+              <List.Item
+                title={'Custom Input'}
+                right={(props: any) => (
+                  <Switch
+                    {...props}
+                    value={showCustomInput}
+                    color={
+                      nightMode
+                        ? DarkTheme.colors.primary
+                        : DefaultTheme.colors.primary
+                    }
+                    onValueChange={value => setShowCustomInput(value)}
+                  />
+                )}
+              />
+
               <Title style={{textAlign: 'center'}}>Form Builder</Title>
               <View style={{height: 20}} />
               <FormBuilder
+                CustomInput={showCustomInput && CustomTextInput}
                 formConfigArray={[
                   {
                     name: 'name',
