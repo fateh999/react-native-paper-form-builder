@@ -1,5 +1,11 @@
 import React, {useEffect, Fragment, useState} from 'react';
-import {View, LayoutChangeEvent, ScrollView, Platform} from 'react-native';
+import {
+  View,
+  LayoutChangeEvent,
+  ScrollView,
+  Platform,
+  Keyboard,
+} from 'react-native';
 import {Controller, ValidationOptions} from 'react-hook-form';
 import {
   TextInput,
@@ -186,7 +192,11 @@ function AppDropdown(props: any) {
       onDismiss={() => setShowDropdown(false)}
       anchor={
         <Fragment>
-          <TouchableRipple onPress={() => setShowDropdown(true)}>
+          <TouchableRipple
+            onPress={() => {
+              Keyboard.dismiss();
+              setShowDropdown(true);
+            }}>
             <TextInput
               onLayout={(ev: LayoutChangeEvent) => {
                 setWidth(ev.nativeEvent.layout.width);
@@ -280,7 +290,11 @@ function AppAutocomplete(props: any) {
 
   return (
     <Fragment>
-      <TouchableRipple onPress={() => setShowDropdown(true)}>
+      <TouchableRipple
+        onPress={() => {
+          Keyboard.dismiss();
+          setShowDropdown(true);
+        }}>
         <TextInput
           mode={mode}
           editable={false}
