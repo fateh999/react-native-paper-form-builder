@@ -1,11 +1,7 @@
 import React from 'react';
 import { ValidationOptions } from 'react-hook-form';
-import { TextInputProps } from 'react-native-paper/lib/typescript/src/components/TextInput/TextInput';
-import { Theme } from 'react-native-paper/lib/typescript/src/types';
+import { TextInput } from 'react-native-paper';
 declare type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
-declare type OptionalThemeType = {
-    theme?: Theme;
-};
 export declare type FormConfigType = {
     name: string;
     type: 'input' | 'select' | 'autocomplete' | 'checkbox' | 'radio' | 'switch';
@@ -16,7 +12,7 @@ export declare type FormConfigType = {
     }>;
     label?: string | React.ReactNode;
     rules?: ValidationOptions;
-    textInputProps?: Without<TextInputProps, 'theme'> | OptionalThemeType;
+    textInputProps?: React.ComponentProps<typeof TextInput>;
 };
 export declare type FormConfigArrayType = Array<Without<FormConfigType, 'handleSubmit'>>;
 declare type FormBuilderPropType = {

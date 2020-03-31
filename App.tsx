@@ -11,8 +11,8 @@ import {
   DarkTheme,
   Surface,
   DefaultTheme,
-  useTheme,
 } from 'react-native-paper';
+import KeyboardSpacer from './src/KeyboardSpacer';
 
 function App() {
   const [nightMode, setNightmode] = useState(false);
@@ -63,7 +63,9 @@ function App() {
                 icon={nightMode ? 'brightness-7' : 'brightness-3'}
                 onPress={() => setNightmode(!nightMode)}></Appbar.Action>
             </Appbar.Header>
-            <ScrollView style={{flex: 1, padding: 20}}>
+            <ScrollView
+              style={{flex: 1, padding: 20}}
+              keyboardShouldPersistTaps={'handled'}>
               <Title style={{textAlign: 'center'}}>Form Builder</Title>
               <View style={{height: 20}} />
               <FormBuilder
@@ -234,6 +236,52 @@ function App() {
                       },
                     },
                   },
+                  {
+                    name: 'city',
+                    type: 'autocomplete',
+                    options: [
+                      {
+                        label: 'Lucknow',
+                        value: 1,
+                      },
+                      {
+                        label: 'Noida',
+                        value: 2,
+                      },
+                      {
+                        label: 'Delhi',
+                        value: 3,
+                      },
+                      {
+                        label: 'Bangalore',
+                        value: 4,
+                      },
+                      {
+                        label: 'Pune',
+                        value: 5,
+                      },
+                      {
+                        label: 'Mumbai',
+                        value: 6,
+                      },
+                      {
+                        label: 'Ahmedabad',
+                        value: 7,
+                      },
+                      {
+                        label: 'Patna',
+                        value: 8,
+                      },
+                    ],
+                    variant: 'outlined',
+                    label: 'City',
+                    rules: {
+                      required: {
+                        value: true,
+                        message: 'City is required',
+                      },
+                    },
+                  },
                 ]}
                 form={form}>
                 <View style={{height: 20}} />
@@ -252,6 +300,7 @@ function App() {
                 </Button>
               </FormBuilder>
             </ScrollView>
+            <KeyboardSpacer />
           </SafeAreaView>
         </Surface>
       </ThemeProvider>

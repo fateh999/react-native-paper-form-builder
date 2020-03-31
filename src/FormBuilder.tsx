@@ -14,7 +14,13 @@ import {
   List,
   RadioButton,
   Switch,
+  Modal,
+  Portal,
+  Surface,
+  IconButton,
 } from 'react-native-paper';
+//@ts-ignore
+import KeyboardSpacer from './KeyboardSpacer';
 
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
@@ -87,7 +93,7 @@ function FormBuilder(props: FormBuilderPropType) {
         return <AppDropdown {...propsInput} />;
       }
       case 'autocomplete': {
-        return <AppDropdown {...propsInput} autocomplete />;
+        return <AppAutocomplete {...propsInput} />;
       }
       case 'checkbox': {
         return <AppCheckbox {...propsInput} />;
@@ -134,16 +140,7 @@ function FormBuilder(props: FormBuilderPropType) {
 
 function AppDropdown(props: any) {
   const {colors} = useTheme();
-  const {
-    mode,
-    options,
-    setValue,
-    name,
-    watch,
-    triggerValidation,
-    autocomplete,
-    label,
-  } = props;
+  const {mode, options, setValue, name, watch, triggerValidation} = props;
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [displayValue, setDisplayValue] = useState('');
@@ -183,7 +180,7 @@ function AppDropdown(props: any) {
 
   return (
     <Menu
-      style={{marginTop: autocomplete ? 0 : height + 10}}
+      style={{marginTop: height + 10}}
       visible={showDropdown}
       contentStyle={{width}}
       onDismiss={() => setShowDropdown(false)}
@@ -204,13 +201,6 @@ function AppDropdown(props: any) {
           </TouchableRipple>
         </Fragment>
       }>
-      {autocomplete && (
-        <Searchbar
-          value={searchValue}
-          onChangeText={setSearchValue}
-          placeholder={`Search ${label}`}
-        />
-      )}
       <ScrollView style={{width, maxHeight: 250}}>
         <Fragment>
           {filteredOptions.map((option: any) => (
@@ -239,6 +229,121 @@ function AppDropdown(props: any) {
         </Fragment>
       </ScrollView>
     </Menu>
+  );
+}
+
+function AppAutocomplete(props: any) {
+  const {colors} = useTheme();
+  const {
+    mode,
+    options,
+    setValue,
+    name,
+    watch,
+    triggerValidation,
+    label,
+  } = props;
+  const [displayValue, setDisplayValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [filteredOptions, setFilteredOptions] = useState(options);
+
+  useEffect(() => {
+    if (watch(name) === '') {
+      return setDisplayValue('');
+    } else {
+      triggerValidation(name);
+    }
+    const activeOption = options.find(
+      (option: any) => option.value === watch(name),
+    );
+    setDisplayValue(activeOption?.label);
+  }, [watch(name)]);
+
+  useEffect(() => {
+    if (searchValue.trim()) {
+      setFilteredOptions(
+        [...options].filter(
+          option =>
+            option.label.toLowerCase().indexOf(searchValue.toLowerCase()) !==
+            -1,
+        ),
+      );
+    } else {
+      setFilteredOptions([...options]);
+    }
+  }, [searchValue]);
+
+  useEffect(() => {
+    if (searchValue.trim()) setSearchValue('');
+  }, [showDropdown]);
+
+  return (
+    <Fragment>
+      <TouchableRipple onPress={() => setShowDropdown(true)}>
+        <TextInput
+          mode={mode}
+          editable={false}
+          pointerEvents={'none'}
+          {...props}
+          value={displayValue}
+        />
+      </TouchableRipple>
+      <Portal>
+        <Modal
+          visible={showDropdown}
+          dismissable={true}
+          onDismiss={() => setShowDropdown(false)}
+          contentContainerStyle={{flex: 1}}>
+          <Surface style={{flex: 1}}>
+            <List.Item
+              title={''}
+              left={(props: any) => (
+                <View style={{justifyContent: 'center'}}>
+                  <IconButton
+                    icon={'close'}
+                    onPress={() => setShowDropdown(false)}
+                    {...props}></IconButton>
+                </View>
+              )}></List.Item>
+            <View style={{paddingHorizontal: 15, paddingVertical: 5}}>
+              <Searchbar
+                value={searchValue}
+                onChangeText={setSearchValue}
+                placeholder={`Search ${label}`}
+              />
+            </View>
+            <ScrollView style={{flex: 1}}>
+              <Fragment>
+                {filteredOptions.map((option: any) => (
+                  <Fragment key={option.value}>
+                    <List.Item
+                      onPress={() => {
+                        setValue(name, option.value);
+                        setShowDropdown(false);
+                      }}
+                      title={
+                        <Subheading
+                          style={{
+                            color:
+                              watch(name) === option.value
+                                ? colors.primary
+                                : undefined,
+                          }}>
+                          {option.label}
+                        </Subheading>
+                      }
+                    />
+                    <Divider />
+                  </Fragment>
+                ))}
+              </Fragment>
+            </ScrollView>
+            {Platform.OS === 'ios' ? <KeyboardSpacer /> : <Fragment />}
+          </Surface>
+        </Modal>
+      </Portal>
+    </Fragment>
   );
 }
 
