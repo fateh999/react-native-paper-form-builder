@@ -21,47 +21,9 @@ import {
   useTheme,
   List,
   Switch,
-  IconButton,
 } from 'react-native-paper';
 import KeyboardSpacer from './src/KeyboardSpacer';
 import {TextInputProps} from 'react-native-paper/lib/typescript/src/components/TextInput/TextInput';
-
-function CustomTextInput(props: TextInputProps | any) {
-  const Theme = useTheme();
-  const {error} = props;
-
-  return (
-    <View
-      style={{
-        backgroundColor: Theme.colors.surface,
-        borderRadius: 30,
-        height: 60,
-        justifyContent: 'center',
-        borderWidth: 2,
-        borderColor: error ? Theme.colors.error : Theme.colors.placeholder,
-      }}>
-      {props.options && (
-        <IconButton
-          icon={'menu-down'}
-          size={32}
-          style={{right: 0, top: 0, bottom: 0, position: 'absolute'}}
-        />
-      )}
-      <TextInput
-        {...props}
-        style={{
-          color: Theme.colors.onSurface,
-          paddingLeft: 25,
-          paddingRight: 25,
-          height: 56,
-          ...props.style,
-        }}
-        placeholder={props.label}
-        placeholderTextColor={Theme.colors.placeholder}
-      />
-    </View>
-  );
-}
 
 function App() {
   const [nightMode, setNightmode] = useState(false);
@@ -327,6 +289,54 @@ function App() {
         </Surface>
       </ThemeProvider>
     </Provider>
+  );
+}
+
+function CustomTextInput(props: TextInputProps) {
+  const Theme = useTheme();
+  const {error} = props;
+
+  return (
+    <View
+      style={{
+        backgroundColor: Theme.colors.surface,
+        borderRadius: 30,
+        height: 60,
+        justifyContent: 'center',
+        borderWidth: 2,
+        borderColor: error ? Theme.colors.error : Theme.colors.placeholder,
+      }}>
+      <TextInput
+        {...props}
+        style={{
+          color: Theme.colors.onSurface,
+          paddingLeft: 25,
+          paddingRight: 25,
+          height: 56,
+          ...props.style,
+        }}
+        placeholder={props.label}
+        placeholderTextColor={Theme.colors.placeholder}
+      />
+    </View>
+  );
+}
+
+function SimpleCustomTextInput(props: TextInputProps) {
+  const {error, label, style} = props;
+
+  return (
+    <TextInput
+      placeholder={label}
+      {...props}
+      style={{
+        color: 'black',
+        height: 56,
+        borderBottomWidth: 2,
+        borderBottomColor: error ? 'red' : 'grey',
+        ...style,
+      }}
+    />
   );
 }
 
