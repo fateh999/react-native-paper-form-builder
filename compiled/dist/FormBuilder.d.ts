@@ -19,6 +19,7 @@ declare type FormBuilderPropType = {
     formConfigArray: FormConfigArrayType;
     form: any;
     children?: any;
+    CustomInput?: any;
 };
 declare function FormBuilder(props: FormBuilderPropType): JSX.Element;
 export default FormBuilder;

@@ -193,8 +193,30 @@ export default BasicExample;
 	}
 ```
 
+#### Simple Example of Custom Input:
+
+```javascript
+function SimpleCustomTextInput(props: TextInputProps) {
+  const {error, label, style} = props;
+
+  return (
+    <TextInput
+      placeholder={label}
+      {...props}
+      style={{
+        color: 'black',
+        height: 56,
+        borderBottomWidth: 2,
+        borderBottomColor: error ? 'red' : 'grey',
+        ...style,
+      }}
+    />
+  );
+}
+```
+
 #### TODO :
 
 - ~~Modal Autocomplete~~
-- Custom Input
+- ~~Custom Input~~
 - Input Icons
