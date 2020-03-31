@@ -236,52 +236,6 @@ function App() {
                       },
                     },
                   },
-                  {
-                    name: 'city',
-                    type: 'autocomplete',
-                    options: [
-                      {
-                        label: 'Lucknow',
-                        value: 1,
-                      },
-                      {
-                        label: 'Noida',
-                        value: 2,
-                      },
-                      {
-                        label: 'Delhi',
-                        value: 3,
-                      },
-                      {
-                        label: 'Bangalore',
-                        value: 4,
-                      },
-                      {
-                        label: 'Pune',
-                        value: 5,
-                      },
-                      {
-                        label: 'Mumbai',
-                        value: 6,
-                      },
-                      {
-                        label: 'Ahmedabad',
-                        value: 7,
-                      },
-                      {
-                        label: 'Patna',
-                        value: 8,
-                      },
-                    ],
-                    variant: 'outlined',
-                    label: 'City',
-                    rules: {
-                      required: {
-                        value: true,
-                        message: 'City is required',
-                      },
-                    },
-                  },
                 ]}
                 form={form}>
                 <View style={{height: 20}} />
