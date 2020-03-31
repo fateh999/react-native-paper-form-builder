@@ -5,8 +5,9 @@ import { TextInput, HelperText, useTheme, Menu, TouchableRipple, Subheading, Div
 //@ts-ignore
 import KeyboardSpacer from './KeyboardSpacer';
 function FormBuilder(props) {
-    const { form, formConfigArray, children } = props;
+    const { form, formConfigArray, children, CustomInput } = props;
     const { colors } = useTheme();
+    const Input = CustomInput ? CustomInput : TextInput;
     useEffect(() => {
         console.log('Render called...', form.errors);
     });
@@ -36,13 +37,13 @@ function FormBuilder(props) {
         }
         switch (input.type) {
             case 'input': {
-                return <TextInput {...propsInput}/>;
+                return <Input {...propsInput}/>;
             }
             case 'select': {
-                return <AppDropdown {...propsInput}/>;
+                return <AppDropdown {...propsInput} Input={Input}/>;
             }
             case 'autocomplete': {
-                return <AppAutocomplete {...propsInput}/>;
+                return <AppAutocomplete {...propsInput} Input={Input}/>;
             }
             case 'checkbox': {
                 return <AppCheckbox {...propsInput}/>;
@@ -54,7 +55,7 @@ function FormBuilder(props) {
                 return <AppSwitch {...propsInput} radio/>;
             }
             default: {
-                return <TextInput {...propsInput}/>;
+                return <Input {...propsInput}/>;
             }
         }
     };
@@ -73,7 +74,7 @@ function FormBuilder(props) {
 }
 function AppDropdown(props) {
     const { colors } = useTheme();
-    const { mode, options, setValue, name, watch, triggerValidation } = props;
+    const { mode, options, setValue, name, watch, triggerValidation, Input, } = props;
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const [displayValue, setDisplayValue] = useState('');
@@ -107,8 +108,8 @@ function AppDropdown(props) {
           <TouchableRipple onPress={() => {
         Keyboard.dismiss();
         setShowDropdown(true);
-    }}>
-            <TextInput onLayout={(ev) => {
+    }} rippleColor={'transparent'}>
+            <Input onLayout={(ev) => {
         setWidth(ev.nativeEvent.layout.width);
         setHeight(ev.nativeEvent.layout.height);
     }} mode={mode} editable={false} pointerEvents={'none'} {...props} value={displayValue}/>
@@ -135,7 +136,7 @@ function AppDropdown(props) {
 }
 function AppAutocomplete(props) {
     const { colors } = useTheme();
-    const { mode, options, setValue, name, watch, triggerValidation, label, } = props;
+    const { mode, options, setValue, name, watch, triggerValidation, label, Input, } = props;
     const [displayValue, setDisplayValue] = useState('');
     const [searchValue, setSearchValue] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
@@ -167,8 +168,8 @@ function AppAutocomplete(props) {
       <TouchableRipple onPress={() => {
         Keyboard.dismiss();
         setShowDropdown(true);
-    }}>
-        <TextInput mode={mode} editable={false} pointerEvents={'none'} {...props} value={displayValue}/>
+    }} rippleColor={'transparent'}>
+        <Input mode={mode} editable={false} pointerEvents={'none'} {...props} value={displayValue}/>
       </TouchableRipple>
       <Portal>
         <Modal visible={showDropdown} dismissable={true} onDismiss={() => setShowDropdown(false)} contentContainerStyle={{ flex: 1 }}>
