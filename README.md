@@ -10,7 +10,7 @@ Form Builder written in typescript with inbuilt Validation, dropdown, autocomple
 
 #### Demo :
 
-![](https://i.ibb.co/CHwmKJN/ezgif-1-894da084218f.gif)
+![](https://i.ibb.co/C6RDdC2/ezgif-7-c021a6c1fa26.gif)
 
 #### Steps to install :
 
