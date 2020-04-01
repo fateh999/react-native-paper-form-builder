@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper-form-builder",
-  "version": "0.0.9",
+  "version": "1.0.1",
   "private": false,
   "scripts": {
     "android": "react-native run-android",
@@ -16,11 +16,11 @@
   "main": "compiled/dist/FormBuilder.js",
   "types": "compiled/dist/FormBuilder.d.ts",
   "dependencies": {
-    "react": "16.9.0",
-    "react-hook-form": "^5.0.3",
-    "react-native": "0.61.5",
-    "react-native-paper": "^3.6.0",
-    "react-native-vector-icons": "^6.6.0"
+    "react": "*",
+    "react-hook-form": "*",
+    "react-native": "*",
+    "react-native-paper": "*",
+    "react-native-vector-icons": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
