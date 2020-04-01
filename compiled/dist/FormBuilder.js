@@ -5,7 +5,7 @@ import { TextInput, HelperText, useTheme, Menu, TouchableRipple, Subheading, Div
 //@ts-ignore
 import KeyboardSpacer from './KeyboardSpacer';
 function FormBuilder(props) {
-    const { form, formConfigArray, children, CustomInput } = props;
+    const { form, formConfigArray, children, CustomInput, helperTextStyle, inputViewStyle, } = props;
     const { colors } = useTheme();
     const Input = CustomInput ? CustomInput : TextInput;
     useEffect(() => {
@@ -59,10 +59,11 @@ function FormBuilder(props) {
             }
         }
     };
-    const renderAppBuilderItem = (input, index) => (<View key={index} style={{ marginBottom: 15 }}>
+    const renderAppBuilderItem = (input, index) => (<View key={index} style={{ marginBottom: 15, ...inputViewStyle }}>
       <Controller as={inputSelector(input)} name={input.name} rules={input.rules} control={form.control} onChange={onChange}/>
       {form.errors[input.name] && (<HelperText style={{
         color: colors.error,
+        ...helperTextStyle,
     }}>
           {form.errors[input.name]?.message}
         </HelperText>)}

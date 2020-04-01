@@ -5,6 +5,8 @@ import {
   ScrollView,
   Platform,
   Keyboard,
+  ViewStyle,
+  TextStyle,
 } from 'react-native';
 import {Controller, ValidationOptions} from 'react-hook-form';
 import {
@@ -52,10 +54,19 @@ type FormBuilderPropType = {
   form: any;
   children?: any;
   CustomInput?: any;
+  helperTextStyle?: TextStyle;
+  inputViewStyle?: ViewStyle;
 };
 
 function FormBuilder(props: FormBuilderPropType) {
-  const {form, formConfigArray, children, CustomInput} = props;
+  const {
+    form,
+    formConfigArray,
+    children,
+    CustomInput,
+    helperTextStyle,
+    inputViewStyle,
+  } = props;
   const {colors} = useTheme();
   const Input = CustomInput ? CustomInput : TextInput;
 
@@ -119,7 +130,7 @@ function FormBuilder(props: FormBuilderPropType) {
   };
 
   const renderAppBuilderItem = (input: FormConfigType, index: number) => (
-    <View key={index} style={{marginBottom: 15}}>
+    <View key={index} style={{marginBottom: 15, ...inputViewStyle}}>
       <Controller
         as={inputSelector(input)}
         name={input.name}
@@ -131,6 +142,7 @@ function FormBuilder(props: FormBuilderPropType) {
         <HelperText
           style={{
             color: colors.error,
+            ...helperTextStyle,
           }}>
           {form.errors[input.name]?.message}
         </HelperText>
