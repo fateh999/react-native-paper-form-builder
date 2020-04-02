@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useState } from 'react';
-import { View, ScrollView, Platform, Keyboard, } from 'react-native';
+import { View, ScrollView, Platform, Keyboard, FlatList, } from 'react-native';
 import { Controller } from 'react-hook-form';
 import { TextInput, HelperText, useTheme, Menu, TouchableRipple, Subheading, Divider, Searchbar, Checkbox, List, RadioButton, Switch, Modal, Portal, Surface, IconButton, } from 'react-native-paper';
 //@ts-ignore
@@ -26,6 +26,7 @@ function FormBuilder(props) {
             propsInput.setValue = form.setValue;
             propsInput.watch = form.watch;
             propsInput.triggerValidation = form.triggerValidation;
+            propsInput.loadOptions = input.loadOptions;
         }
         if (input.type === 'checkbox' ||
             input.type === 'radio' ||
@@ -137,7 +138,7 @@ function AppDropdown(props) {
 }
 function AppAutocomplete(props) {
     const { colors } = useTheme();
-    const { mode, options, setValue, name, watch, triggerValidation, label, Input, disabled, } = props;
+    const { mode, options, setValue, name, watch, triggerValidation, label, Input, disabled, loadOptions, } = props;
     const [displayValue, setDisplayValue] = useState('');
     const [searchValue, setSearchValue] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
@@ -160,7 +161,7 @@ function AppAutocomplete(props) {
         else {
             setFilteredOptions([...options]);
         }
-    }, [searchValue]);
+    }, [searchValue, options]);
     useEffect(() => {
         if (searchValue.trim())
             setSearchValue('');
@@ -185,23 +186,25 @@ function AppAutocomplete(props) {
             <View style={{ paddingHorizontal: 15, paddingVertical: 5 }}>
               <Searchbar value={searchValue} onChangeText={setSearchValue} placeholder={`Search ${label}`}/>
             </View>
-            <ScrollView style={{ flex: 1 }}>
-              <Fragment>
-                {filteredOptions.map((option) => (<Fragment key={option.value}>
+            <FlatList refreshing={options.length === 0 ? true : false} onRefresh={() => {
+        if (loadOptions) {
+            loadOptions();
+        }
+    }} initialNumToRender={10} maxToRenderPerBatch={20} extraData={watch(name)} keyboardShouldPersistTaps={'handled'} data={filteredOptions} keyExtractor={(item) => `${item.value}`} renderItem={({ item }) => (<Fragment>
+                  <Fragment key={item.value}>
                     <List.Item onPress={() => {
-        setValue(name, option.value);
+        setValue(name, item.value);
         setShowDropdown(false);
     }} title={<Subheading style={{
-        color: watch(name) === option.value
+        color: watch(name) === item.value
             ? colors.primary
             : undefined,
     }}>
-                          {option.label}
+                          {item.label}
                         </Subheading>}/>
                     <Divider />
-                  </Fragment>))}
-              </Fragment>
-            </ScrollView>
+                  </Fragment>
+                </Fragment>)}/>
             {Platform.OS === 'ios' ? <KeyboardSpacer /> : <Fragment />}
           </Surface>
         </Modal>

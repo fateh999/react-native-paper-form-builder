@@ -11,6 +11,7 @@ export declare type FormConfigType = {
         value: string | number;
         label: string;
     }>;
+    loadOptions?: any;
     label?: string | React.ReactNode;
     rules?: ValidationOptions;
     textInputProps?: React.ComponentProps<typeof TextInput>;

@@ -5,7 +5,9 @@ Form Builder written in typescript with inbuilt Validation, dropdown, autocomple
 #### Dependencies to Install :
 
 - [react-native-paper](https://www.npmjs.com/package/react-native-paper)
+
 - [react-hook-form](https://www.npmjs.com/package/react-hook-form)
+
 - [react-native-vector-icons](https://www.npmjs.com/package/react-native-vector-icons) Follow the configuration step of react-native-vector-icons as provided in the docs.
 
 #### Demo :
@@ -15,7 +17,9 @@ Form Builder written in typescript with inbuilt Validation, dropdown, autocomple
 #### Steps to install :
 
 ```javascript
+
 npm i react-native-paper-form-builder
+
 ```
 
 ```javascript
@@ -26,17 +30,23 @@ import FormBuilder from 'react-native-paper-form-builder';
 
 ```javascript
 import React from 'react';
+
 import {View, StyleSheet, ScrollView, Text} from 'react-native';
+
 import FormBuilder from 'react-native-paper-form-builder';
+
 import {useForm} from 'react-hook-form';
+
 import {Button} from 'react-native-paper';
 
 function BasicExample() {
   const form = useForm({
     defaultValues: {
       email: '',
+
       password: '',
     },
+
     mode: 'onChange',
   });
 
@@ -44,34 +54,47 @@ function BasicExample() {
     <View style={styles.containerStyle}>
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <Text style={styles.headingStyle}>Form Builder Basic Demo</Text>
+
         <FormBuilder
           form={form}
           formConfigArray={[
             {
               type: 'input',
+
               name: 'email',
+
               label: 'Email',
+
               rules: {
                 required: {
                   value: true,
+
                   message: 'Email is required',
                 },
               },
+
               textInputProps: {
                 keyboardType: 'email-address',
+
                 autoCapitalize: 'none',
               },
             },
+
             {
               type: 'input',
+
               name: 'password',
+
               label: 'Password',
+
               rules: {
                 required: {
                   value: true,
-                  message: 'Email is required',
+
+                  message: 'Password is required',
                 },
               },
+
               textInputProps: {
                 secureTextEntry: true,
               },
@@ -94,14 +117,20 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
   },
+
   scrollViewStyle: {
     flex: 1,
+
     padding: 15,
+
     justifyContent: 'center',
   },
+
   headingStyle: {
     fontSize: 30,
+
     textAlign: 'center',
+
     marginBottom: 40,
   },
 });
@@ -118,79 +147,132 @@ export default BasicExample;
 | formConfigArray | Array of Input Configs which are specified below                                             |
 | form            | useForm hook value                                                                           |
 | children        | (Optional) React Component For Showing Buttons or any other component at the end of the form |  | children | Optional React Component For Showing Buttons or any other component at the end of the form |
+| CustomInput     | (Optional) Custom React Input in place of react native paper default input                   |
+| helperTextStyle | (Optional) Bottom Helper Text Style                                                          |
+| inputViewStyle  | (Optional) Container Style wrapping text input                                               |
 
 #### How to generate different input types:
 
-1.  TextInput
+1. TextInput
 
 ```javascript
-	{
-		type:  'input',
-		name:  string, // Same as defined in default values
-		label?:  string,
-		variant?: 'outlined'  |  'flat',
-		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
-		textInputProps?: React.ComponentProps<typeof  TextInput> // Props of React Native Paper TextInput
-	}
+
+{
+
+type: 'input',
+
+name: string, // Same as defined in default values
+
+label?: string,
+
+variant?:  'outlined'  |  'flat',
+
+rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+
+textInputProps?: React.ComponentProps<typeof TextInput>  // Props of React Native Paper TextInput
+
+}
+
 ```
 
-2.  Select
+2. Select
 
 ```javascript
-	{
-		type:  'select',
-		name:  string, // Same as defined in default values
-		options:  Array<{ value: string | number,label: string }>,
-		label?:  string,
-		variant?: 'outlined'  |  'flat',
-		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
-	}
+
+{
+
+type: 'select',
+
+name: string, // Same as defined in default values
+
+options: Array<{ value: string | number,label: string }>,
+
+label?: string,
+
+variant?:  'outlined'  |  'flat',
+
+rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+
+}
+
 ```
 
-3.  Autocomplete
+3. Autocomplete
 
 ```javascript
-	{
-		type:  'autocomplete',
-		name:  string, // Same as defined in default values
-		options:  Array<{ value: string | number,label: string }>,
-		label?:  string,
-		variant?: 'outlined'  |  'flat',
-		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
-	}
+
+{
+
+type: 'autocomplete',
+
+name: string, // Same as defined in default values
+
+options: Array<{ value: string | number,label: string }>,
+
+label?: string,
+
+variant?:  'outlined'  |  'flat',
+
+loadOptions?: any, // Pass a function that reloads options in case they fail to update
+
+rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+
+}
+
 ```
 
-4.  Checkbox
+4. Checkbox
 
 ```javascript
-	{
-		type:  'checkbox',
-		name:  string, // Same as defined in default values
-		label?:  string | React.ReactNode,
-		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
-	}
+
+{
+
+type: 'checkbox',
+
+name: string, // Same as defined in default values
+
+label?: string | React.ReactNode,
+
+rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+
+}
+
 ```
 
-5.  Radio
+5. Radio
 
 ```javascript
-	{
-		type:  'radio',
-		name:  string, // Same as defined in default values
-		label?:  string | React.ReactNode,
-		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
-	}
+
+{
+
+type: 'radio',
+
+name: string, // Same as defined in default values
+
+label?: string | React.ReactNode,
+
+rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+
+}
+
 ```
 
 6. Switch
 
 ```javascript
-	{
-		type:  'switch',
-		name:  string, // Same as defined in default values
-		label?:  string | React.ReactNode,
-		rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
-	}
+
+{
+
+type: 'switch',
+
+name: string, // Same as defined in default values
+
+label?: string | React.ReactNode,
+
+rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+
+}
+
 ```
 
 #### Simple Example of Custom Input:
@@ -205,9 +287,13 @@ function SimpleCustomTextInput(props: TextInputProps) {
       {...props}
       style={{
         color: 'black',
+
         height: 56,
+
         borderBottomWidth: 2,
+
         borderBottomColor: error ? 'red' : 'grey',
+
         ...style,
       }}
     />
@@ -218,5 +304,8 @@ function SimpleCustomTextInput(props: TextInputProps) {
 #### TODO :
 
 - ~~Modal Autocomplete~~
+
 - ~~Custom Input~~
+- ~~FlatList Integration in Autocomplete~~
+- ~~Refresh handler in Autocomplete~~
 - Input Icons
