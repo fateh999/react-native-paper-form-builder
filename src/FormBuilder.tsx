@@ -7,6 +7,7 @@ import {
   Keyboard,
   ViewStyle,
   TextStyle,
+  FlatList,
 } from 'react-native';
 import {Controller, ValidationOptions} from 'react-hook-form';
 import {
@@ -40,6 +41,7 @@ export type FormConfigType = {
     value: string | number;
     label: string;
   }>;
+  loadOptions?: any;
   label?: string | React.ReactNode;
   rules?: ValidationOptions;
   textInputProps?: React.ComponentProps<typeof TextInput>;
@@ -53,7 +55,7 @@ type FormBuilderPropType = {
   formConfigArray: FormConfigArrayType;
   form: any;
   children?: any;
-  CustomInput?: any;
+  CustomInput?: React.ReactNode;
   helperTextStyle?: TextStyle;
   inputViewStyle?: ViewStyle;
 };
@@ -68,7 +70,7 @@ function FormBuilder(props: FormBuilderPropType) {
     inputViewStyle,
   } = props;
   const {colors} = useTheme();
-  const Input = CustomInput ? CustomInput : TextInput;
+  const Input: any = CustomInput ? CustomInput : TextInput;
 
   useEffect(() => {
     console.log('Render called...', form.errors);
@@ -91,6 +93,7 @@ function FormBuilder(props: FormBuilderPropType) {
       propsInput.setValue = form.setValue;
       propsInput.watch = form.watch;
       propsInput.triggerValidation = form.triggerValidation;
+      propsInput.loadOptions = input.loadOptions;
     }
 
     if (
@@ -276,6 +279,8 @@ function AppAutocomplete(props: any) {
     triggerValidation,
     label,
     Input,
+    disabled,
+    loadOptions,
   } = props;
   const [displayValue, setDisplayValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -306,7 +311,7 @@ function AppAutocomplete(props: any) {
     } else {
       setFilteredOptions([...options]);
     }
-  }, [searchValue]);
+  }, [searchValue, options]);
 
   useEffect(() => {
     if (searchValue.trim()) setSearchValue('');
@@ -315,7 +320,12 @@ function AppAutocomplete(props: any) {
   return (
     <Fragment>
       <TouchableRipple
+        disabled={disabled}
         onPress={() => {
+          setFilteredOptions([]);
+          setTimeout(() => {
+            setFilteredOptions([...options]);
+          }, 300);
           Keyboard.dismiss();
           setShowDropdown(true);
         }}
@@ -352,32 +362,44 @@ function AppAutocomplete(props: any) {
                 placeholder={`Search ${label}`}
               />
             </View>
-            <ScrollView style={{flex: 1}}>
-              <Fragment>
-                {filteredOptions.map((option: any) => (
-                  <Fragment key={option.value}>
+            <FlatList
+              refreshing={options.length === 0 ? true : false}
+              onRefresh={() => {
+                if (loadOptions) {
+                  loadOptions();
+                }
+              }}
+              initialNumToRender={10}
+              maxToRenderPerBatch={20}
+              extraData={watch(name)}
+              keyboardShouldPersistTaps={'handled'}
+              data={filteredOptions}
+              keyExtractor={(item: any) => `${item.value}`}
+              renderItem={({item}) => (
+                <Fragment>
+                  <Fragment key={item.value}>
                     <List.Item
                       onPress={() => {
-                        setValue(name, option.value);
+                        setValue(name, item.value);
                         setShowDropdown(false);
                       }}
                       title={
                         <Subheading
                           style={{
                             color:
-                              watch(name) === option.value
+                              watch(name) === item.value
                                 ? colors.primary
                                 : undefined,
                           }}>
-                          {option.label}
+                          {item.label}
                         </Subheading>
                       }
                     />
                     <Divider />
                   </Fragment>
-                ))}
-              </Fragment>
-            </ScrollView>
+                </Fragment>
+              )}
+            />
             {Platform.OS === 'ios' ? <KeyboardSpacer /> : <Fragment />}
           </Surface>
         </Modal>

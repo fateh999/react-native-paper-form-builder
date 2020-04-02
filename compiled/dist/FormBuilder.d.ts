@@ -11,6 +11,7 @@ export declare type FormConfigType = {
         value: string | number;
         label: string;
     }>;
+    loadOptions?: any;
     label?: string | React.ReactNode;
     rules?: ValidationOptions;
     textInputProps?: React.ComponentProps<typeof TextInput>;
@@ -20,7 +21,7 @@ declare type FormBuilderPropType = {
     formConfigArray: FormConfigArrayType;
     form: any;
     children?: any;
-    CustomInput?: any;
+    CustomInput?: React.ReactNode;
     helperTextStyle?: TextStyle;
     inputViewStyle?: ViewStyle;
 };

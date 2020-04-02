@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState} from 'react';
 import FormBuilder from './src/FormBuilder';
 import {useForm} from 'react-hook-form';
 import {
@@ -8,6 +8,7 @@ import {
   Text,
   Linking,
   TextInput,
+  Alert,
 } from 'react-native';
 import {
   Appbar,
