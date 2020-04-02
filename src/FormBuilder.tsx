@@ -358,34 +358,32 @@ function AppAutocomplete(props: any) {
                 placeholder={`Search ${label}`}
               />
             </View>
-            {filteredOptions.length && (
-              <ScrollView style={{flex: 1}}>
-                <Fragment>
-                  {filteredOptions.map((option: any) => (
-                    <Fragment key={option.value}>
-                      <List.Item
-                        onPress={() => {
-                          setValue(name, option.value);
-                          setShowDropdown(false);
-                        }}
-                        title={
-                          <Subheading
-                            style={{
-                              color:
-                                watch(name) === option.value
-                                  ? colors.primary
-                                  : undefined,
-                            }}>
-                            {option.label}
-                          </Subheading>
-                        }
-                      />
-                      <Divider />
-                    </Fragment>
-                  ))}
-                </Fragment>
-              </ScrollView>
-            )}
+            <ScrollView style={{flex: 1}}>
+              <Fragment>
+                {filteredOptions.map((option: any) => (
+                  <Fragment key={option.value}>
+                    <List.Item
+                      onPress={() => {
+                        setValue(name, option.value);
+                        setShowDropdown(false);
+                      }}
+                      title={
+                        <Subheading
+                          style={{
+                            color:
+                              watch(name) === option.value
+                                ? colors.primary
+                                : undefined,
+                          }}>
+                          {option.label}
+                        </Subheading>
+                      }
+                    />
+                    <Divider />
+                  </Fragment>
+                ))}
+              </Fragment>
+            </ScrollView>
             {Platform.OS === 'ios' ? <KeyboardSpacer /> : <Fragment />}
           </Surface>
         </Modal>
