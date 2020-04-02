@@ -53,7 +53,7 @@ type FormBuilderPropType = {
   formConfigArray: FormConfigArrayType;
   form: any;
   children?: any;
-  CustomInput?: any;
+  CustomInput?: React.ReactNode;
   helperTextStyle?: TextStyle;
   inputViewStyle?: ViewStyle;
 };
@@ -68,7 +68,7 @@ function FormBuilder(props: FormBuilderPropType) {
     inputViewStyle,
   } = props;
   const {colors} = useTheme();
-  const Input = CustomInput ? CustomInput : TextInput;
+  const Input: any = CustomInput ? CustomInput : TextInput;
 
   useEffect(() => {
     console.log('Render called...', form.errors);
@@ -276,6 +276,7 @@ function AppAutocomplete(props: any) {
     triggerValidation,
     label,
     Input,
+    disabled,
   } = props;
   const [displayValue, setDisplayValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -315,7 +316,12 @@ function AppAutocomplete(props: any) {
   return (
     <Fragment>
       <TouchableRipple
+        disabled={disabled}
         onPress={() => {
+          setFilteredOptions([]);
+          setTimeout(() => {
+            setFilteredOptions([...options]);
+          }, 300);
           Keyboard.dismiss();
           setShowDropdown(true);
         }}
@@ -352,32 +358,34 @@ function AppAutocomplete(props: any) {
                 placeholder={`Search ${label}`}
               />
             </View>
-            <ScrollView style={{flex: 1}}>
-              <Fragment>
-                {filteredOptions.map((option: any) => (
-                  <Fragment key={option.value}>
-                    <List.Item
-                      onPress={() => {
-                        setValue(name, option.value);
-                        setShowDropdown(false);
-                      }}
-                      title={
-                        <Subheading
-                          style={{
-                            color:
-                              watch(name) === option.value
-                                ? colors.primary
-                                : undefined,
-                          }}>
-                          {option.label}
-                        </Subheading>
-                      }
-                    />
-                    <Divider />
-                  </Fragment>
-                ))}
-              </Fragment>
-            </ScrollView>
+            {filteredOptions.length && (
+              <ScrollView style={{flex: 1}}>
+                <Fragment>
+                  {filteredOptions.map((option: any) => (
+                    <Fragment key={option.value}>
+                      <List.Item
+                        onPress={() => {
+                          setValue(name, option.value);
+                          setShowDropdown(false);
+                        }}
+                        title={
+                          <Subheading
+                            style={{
+                              color:
+                                watch(name) === option.value
+                                  ? colors.primary
+                                  : undefined,
+                            }}>
+                            {option.label}
+                          </Subheading>
+                        }
+                      />
+                      <Divider />
+                    </Fragment>
+                  ))}
+                </Fragment>
+              </ScrollView>
+            )}
             {Platform.OS === 'ios' ? <KeyboardSpacer /> : <Fragment />}
           </Surface>
         </Modal>
