@@ -20,7 +20,7 @@ declare type FormBuilderPropType = {
     formConfigArray: FormConfigArrayType;
     form: any;
     children?: any;
-    CustomInput?: any;
+    CustomInput?: React.ReactNode;
     helperTextStyle?: TextStyle;
     inputViewStyle?: ViewStyle;
 };
