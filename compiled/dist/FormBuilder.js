@@ -185,10 +185,10 @@ function AppAutocomplete(props) {
             <View style={{ paddingHorizontal: 15, paddingVertical: 5 }}>
               <Searchbar value={searchValue} onChangeText={setSearchValue} placeholder={`Search ${label}`}/>
             </View>
-            {filteredOptions.length && (<ScrollView style={{ flex: 1 }}>
-                <Fragment>
-                  {filteredOptions.map((option) => (<Fragment key={option.value}>
-                      <List.Item onPress={() => {
+            <ScrollView style={{ flex: 1 }}>
+              <Fragment>
+                {filteredOptions.map((option) => (<Fragment key={option.value}>
+                    <List.Item onPress={() => {
         setValue(name, option.value);
         setShowDropdown(false);
     }} title={<Subheading style={{
@@ -196,12 +196,12 @@ function AppAutocomplete(props) {
             ? colors.primary
             : undefined,
     }}>
-                            {option.label}
-                          </Subheading>}/>
-                      <Divider />
-                    </Fragment>))}
-                </Fragment>
-              </ScrollView>)}
+                          {option.label}
+                        </Subheading>}/>
+                    <Divider />
+                  </Fragment>))}
+              </Fragment>
+            </ScrollView>
             {Platform.OS === 'ios' ? <KeyboardSpacer /> : <Fragment />}
           </Surface>
         </Modal>
