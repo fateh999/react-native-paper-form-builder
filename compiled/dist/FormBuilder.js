@@ -1,7 +1,7 @@
-import React, { useEffect, Fragment, useState } from 'react';
-import { View, ScrollView, Platform, Keyboard, FlatList, } from 'react-native';
+import { Checkbox, Divider, HelperText, IconButton, List, Menu, Modal, Portal, RadioButton, Searchbar, Subheading, Surface, Switch, TextInput, TouchableRipple, useTheme, } from 'react-native-paper';
 import { Controller } from 'react-hook-form';
-import { TextInput, HelperText, useTheme, Menu, TouchableRipple, Subheading, Divider, Searchbar, Checkbox, List, RadioButton, Switch, Modal, Portal, Surface, IconButton, } from 'react-native-paper';
+import { FlatList, Keyboard, Platform, ScrollView, View, } from 'react-native';
+import React, { Fragment, useEffect, useState } from 'react';
 //@ts-ignore
 import KeyboardSpacer from './KeyboardSpacer';
 function FormBuilder(props) {
@@ -13,6 +13,7 @@ function FormBuilder(props) {
     });
     const onChange = (args) => args[0].nativeEvent.text;
     const inputSelector = (input) => {
+        const JSX = input.jsx;
         const propsInput = {
             label: input.label,
             error: form.errors[input.name] && form.errors[input.name]?.message,
@@ -55,14 +56,20 @@ function FormBuilder(props) {
             case 'switch': {
                 return <AppSwitch {...propsInput} radio/>;
             }
+            case 'custom': {
+                //@ts-ignore
+                return <JSX {...input}/>;
+            }
             default: {
                 return <Input {...propsInput}/>;
             }
         }
     };
-    const renderAppBuilderItem = (input, index) => (<View key={index} style={{ marginBottom: 15, ...inputViewStyle }}>
-      <Controller as={inputSelector(input)} name={input.name} rules={input.rules} control={form.control} onChange={onChange}/>
-      {form.errors[input.name] && (<HelperText style={{
+    const renderAppBuilderItem = (input, index) => (<View key={index} style={{ marginBottom: input.type === 'custom' ? 0 : 15, ...inputViewStyle }}>
+      <Controller 
+    //@ts-ignore
+    as={inputSelector(input)} name={input.name} rules={input.rules} control={form.control} onChange={onChange}/>
+      {form.errors[input.name] && input.type === 'custom' && (<HelperText style={{
         color: colors.error,
         ...helperTextStyle,
     }}>

@@ -1,30 +1,31 @@
-import React, {useState} from 'react';
-import FormBuilder from './src/FormBuilder';
-import {useForm} from 'react-hook-form';
 import {
-  View,
+  Alert,
+  Linking,
   SafeAreaView,
   ScrollView,
   Text,
-  Linking,
   TextInput,
-  Alert,
+  View,
 } from 'react-native';
 import {
   Appbar,
-  Title,
   Button,
-  Provider,
-  ThemeProvider,
   DarkTheme,
-  Surface,
   DefaultTheme,
-  useTheme,
   List,
+  Provider,
+  Surface,
   Switch,
+  ThemeProvider,
+  Title,
+  useTheme,
 } from 'react-native-paper';
+import React, {useState} from 'react';
+
+import FormBuilder from './src/FormBuilder';
 import KeyboardSpacer from './src/KeyboardSpacer';
 import {TextInputProps} from 'react-native-paper/lib/typescript/src/components/TextInput/TextInput';
+import {useForm} from 'react-hook-form';
 
 function App() {
   const [nightMode, setNightmode] = useState(false);
@@ -75,7 +76,8 @@ function App() {
               <Appbar.Content title="React Native Paper Form Builder" />
               <Appbar.Action
                 icon={nightMode ? 'brightness-7' : 'brightness-3'}
-                onPress={() => setNightmode(!nightMode)}></Appbar.Action>
+                onPress={() => setNightmode(!nightMode)}
+              />
             </Appbar.Header>
             <ScrollView
               style={{flex: 1, padding: 20}}
@@ -276,7 +278,7 @@ function App() {
                   onPress={onSubmit}>
                   Submit
                 </Button>
-                <View style={{height: 20}}></View>
+                <View style={{height: 20}} />
                 <Button
                   contentStyle={{height: 50}}
                   mode={'outlined'}
@@ -284,6 +286,7 @@ function App() {
                   Reset
                 </Button>
               </FormBuilder>
+              <View style={{height: 40}} />
             </ScrollView>
             <KeyboardSpacer />
           </SafeAreaView>

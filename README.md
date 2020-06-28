@@ -277,6 +277,24 @@ rules?: ValidationOptions,// Validation Rules of Controller component from React
 
 ```
 
+7. Custom
+
+```javascript
+
+{
+
+type: 'custom',
+
+name: string, // Same as defined in default values
+
+jsx?: React.ReactNode,
+
+rules?: ValidationOptions,// Validation Rules of Controller component from React Hook Form
+
+}
+
+```
+
 #### Simple Example of Custom Input:
 
 ```javascript
