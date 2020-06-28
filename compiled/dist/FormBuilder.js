@@ -69,7 +69,7 @@ function FormBuilder(props) {
       <Controller 
     //@ts-ignore
     as={inputSelector(input)} name={input.name} rules={input.rules} control={form.control} onChange={onChange}/>
-      {form.errors[input.name] && input.type === 'custom' && (<HelperText style={{
+      {form.errors[input.name] && input.type !== 'custom' && (<HelperText style={{
         color: colors.error,
         ...helperTextStyle,
     }}>
