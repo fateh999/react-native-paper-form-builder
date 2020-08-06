@@ -1,55 +1,44 @@
 {
   "name": "react-native-paper-form-builder",
-  "version": "1.0.8",
-  "private": false,
-  "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "build": "cd compiled && npx tsc && cd .."
-  },
+  "version": "1.0.9",
+  "description": "Form builder component using React Native Paper and React Hook Form",
   "files": [
-    "compiled"
+    "dist"
   ],
-  "main": "compiled/dist/FormBuilder.js",
-  "types": "compiled/dist/FormBuilder.d.ts",
-  "peerDependencies": {
-    "react": "*",
-    "react-hook-form": "*",
-    "react-native": "*",
-    "react-native-paper": "*",
-    "react-native-vector-icons": "*"
+  "main": "dist/FormBuilder.js",
+  "types": "dist/FormBuilder.d.ts",
+  "scripts": {
+    "build": "tsc"
   },
-  "devDependencies": {
-    "@babel/core": "^7.6.2",
-    "@babel/runtime": "^7.6.2",
-    "@react-native-community/eslint-config": "^0.0.5",
-    "@types/jest": "^24.0.24",
-    "@types/react-native": "^0.60.25",
-    "@types/react-test-renderer": "16.9.1",
-    "@typescript-eslint/eslint-plugin": "^2.12.0",
-    "@typescript-eslint/parser": "^2.12.0",
-    "babel-jest": "^24.9.0",
-    "eslint": "^6.5.1",
-    "jest": "^24.9.0",
-    "metro-react-native-babel-preset": "^0.56.0",
-    "react-test-renderer": "16.9.0",
-    "typescript": "^3.7.3"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fateh999/react-native-paper-dropdown.git"
   },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  },
+  "keywords": [
+    "Dropdown",
+    "Material",
+    "Dropdown",
+    "React",
+    "Native",
+    "Paper"
+  ],
   "author": "Fateh Farooqui",
   "license": "MIT",
-  "repository": "https://github.com/fateh999/react-native-paper-form-builder.git"
+  "bugs": {
+    "url": "https://github.com/fateh999/react-native-paper-dropdown/issues"
+  },
+  "homepage": "https://github.com/fateh999/react-native-paper-dropdown#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-paper": "*"
+  },
+  "devDependencies": {
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {}
 }

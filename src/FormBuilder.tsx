@@ -29,14 +29,18 @@ import {
 } from 'react-native';
 import React, {Fragment, useEffect, useState} from 'react';
 
-//@ts-ignore
-import KeyboardSpacer from './KeyboardSpacer';
-
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export type FormConfigType = {
   name: string;
-  type: 'input' | 'select' | 'autocomplete' | 'checkbox' | 'radio' | 'switch' | 'custom';
+  type:
+    | 'input'
+    | 'select'
+    | 'autocomplete'
+    | 'checkbox'
+    | 'radio'
+    | 'switch'
+    | 'custom';
   variant?: 'outlined' | 'flat';
   options?: Array<{
     value: string | number;
@@ -81,7 +85,7 @@ function FormBuilder(props: FormBuilderPropType) {
   const onChange = (args: any) => args[0].nativeEvent.text;
 
   const inputSelector = (input: FormConfigType) => {
-    const JSX:any = input.jsx;
+    const JSX: any = input.jsx;
     const propsInput: any = {
       label: input.label,
       error: form.errors[input.name] && form.errors[input.name]?.message,
@@ -95,7 +99,7 @@ function FormBuilder(props: FormBuilderPropType) {
       propsInput.name = input.name;
       propsInput.setValue = form.setValue;
       propsInput.watch = form.watch;
-      propsInput.triggerValidation = form.triggerValidation;
+      propsInput.triggerValidation = form.triggerValidation || form.trigger;
       propsInput.loadOptions = input.loadOptions;
     }
 
@@ -107,7 +111,7 @@ function FormBuilder(props: FormBuilderPropType) {
       propsInput.name = input.name;
       propsInput.setValue = form.setValue;
       propsInput.watch = form.watch;
-      propsInput.triggerValidation = form.triggerValidation;
+      propsInput.triggerValidation = form.triggerValidation || form.trigger;
     }
 
     switch (input.type) {
@@ -131,7 +135,7 @@ function FormBuilder(props: FormBuilderPropType) {
       }
       case 'custom': {
         //@ts-ignore
-        return <JSX {...input}/>;
+        return <JSX {...input} />;
       }
       default: {
         return <Input {...propsInput} />;
@@ -140,7 +144,12 @@ function FormBuilder(props: FormBuilderPropType) {
   };
 
   const renderAppBuilderItem = (input: FormConfigType, index: number) => (
-    <View key={index} style={{marginBottom: input.type === 'custom' ? 0 : 15, ...inputViewStyle}}>
+    <View
+      key={index}
+      style={{
+        marginBottom: input.type === 'custom' ? 0 : 15,
+        ...inputViewStyle,
+      }}>
       <Controller
         //@ts-ignore
         as={inputSelector(input)}
@@ -203,7 +212,7 @@ function AppDropdown(props: any) {
     if (searchValue.trim()) {
       setFilteredOptions(
         [...options].filter(
-          option =>
+          (option) =>
             option.label.toLowerCase().indexOf(searchValue.toLowerCase()) !==
             -1,
         ),
@@ -311,7 +320,7 @@ function AppAutocomplete(props: any) {
     if (searchValue.trim()) {
       setFilteredOptions(
         [...options].filter(
-          option =>
+          (option) =>
             option.label.toLowerCase().indexOf(searchValue.toLowerCase()) !==
             -1,
         ),
@@ -408,7 +417,6 @@ function AppAutocomplete(props: any) {
                 </Fragment>
               )}
             />
-            {Platform.OS === 'ios' ? <KeyboardSpacer /> : <Fragment />}
           </Surface>
         </Modal>
       </Portal>
@@ -439,7 +447,7 @@ function AppCheckbox(props: any) {
   return (
     <List.Item
       title={label}
-      left={innerProps => (
+      left={(innerProps) => (
         <Input
           status={statusValue}
           {...props}
@@ -462,13 +470,13 @@ function AppSwitch(props: any) {
   return (
     <List.Item
       title={label}
-      right={innerProps => (
+      right={(innerProps) => (
         <Switch
           value={watch(name)}
           {...props}
           {...innerProps}
           color={error ? colors.error : colors.primary}
-          onValueChange={value => setValue(name, value)}
+          onValueChange={(value) => setValue(name, value)}
         />
       )}></List.Item>
   );
