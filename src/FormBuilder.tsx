@@ -51,6 +51,7 @@ export type FormConfigType = {
   label?: string | React.ReactNode;
   rules?: ValidationOptions;
   textInputProps?: React.ComponentProps<typeof TextInput>;
+  createTag?: React.ReactNode
 };
 
 export type FormConfigArrayType = Array<
@@ -101,6 +102,9 @@ function FormBuilder(props: FormBuilderPropType) {
       propsInput.watch = form.watch;
       propsInput.triggerValidation = form.triggerValidation || form.trigger;
       propsInput.loadOptions = input.loadOptions;
+      if ( input.type === 'autocomplete' ) {
+          propsInput.createTag = input.createTag;
+      }
     }
 
     if (
@@ -298,6 +302,7 @@ function AppAutocomplete(props: any) {
     Input,
     disabled,
     loadOptions,
+    createTag
   } = props;
   const [displayValue, setDisplayValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -313,13 +318,17 @@ function AppAutocomplete(props: any) {
     const activeOption = options.find(
       (option: any) => option.value === watch(name),
     );
-    setDisplayValue(activeOption?.label);
+    setDisplayValue(activeOption != null ? activeOption?.label : watch(name));
   }, [watch(name)]);
 
   useEffect(() => {
     if (searchValue.trim()) {
+      let editableOption = options.slice()
+      if ( createTag != undefined ) {
+          editableOption.push({value: searchValue.toLowerCase(), label: searchValue, isNew: true})
+      }
       setFilteredOptions(
-        [...options].filter(
+        [...editableOption].filter(
           (option) =>
             option.label.toLowerCase().indexOf(searchValue.toLowerCase()) !==
             -1,
@@ -408,7 +417,7 @@ function AppAutocomplete(props: any) {
                                 ? colors.primary
                                 : undefined,
                           }}>
-                          {item.label}
+                          {item.label} {(item.isNew && createTag)}
                         </Subheading>
                       }
                     />
