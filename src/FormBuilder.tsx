@@ -324,13 +324,14 @@ function AppAutocomplete(props: any) {
   useEffect(() => {
     if (searchValue.trim()) {
       let editableOption = options.slice()
-      if ( createTag != undefined ) {
-          editableOption.push({value: searchValue.toLowerCase(), label: searchValue, isNew: true})
+      const activeOption = options.find((option) => option.value === searchValue.trim().toLowerCase());
+      if ( createTag != undefined  && ( activeOption == undefined ) ) {
+          editableOption.push({value: searchValue.trim().toLowerCase(), label: searchValue, isNew: true})
       }
       setFilteredOptions(
         [...editableOption].filter(
           (option) =>
-            option.label.toLowerCase().indexOf(searchValue.toLowerCase()) !==
+            option.label.toLowerCase().indexOf(searchValue.trim().toLowerCase()) !==
             -1,
         ),
       );
