@@ -204,9 +204,9 @@ function AppAutocomplete(props) {
         setValue(name, item.value);
         setShowDropdown(false);
     }} title={<Subheading style={{
-        color: watch(name) === item.value
-            ? colors.primary
-            : undefined,
+        ...(watch(name) === item.value
+            ? { color: colors.primary }
+            : {})
     }}>
                           {item.label}
                         </Subheading>}/>

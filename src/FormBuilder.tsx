@@ -404,10 +404,11 @@ function AppAutocomplete(props: any) {
                       title={
                         <Subheading
                           style={{
-                            color:
+                            ...(
                               watch(name) === item.value
-                                ? colors.primary
-                                : undefined,
+                              ? { color: colors.primary }
+                              : {}
+                            )
                           }}>
                           {item.label}
                         </Subheading>
