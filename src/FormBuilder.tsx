@@ -64,6 +64,7 @@ type FormBuilderPropType = {
   CustomInput?: React.ReactNode;
   helperTextStyle?: TextStyle;
   inputViewStyle?: ViewStyle;
+  onChangeField?: Function;
 };
 
 function FormBuilder(props: FormBuilderPropType) {
@@ -74,9 +75,15 @@ function FormBuilder(props: FormBuilderPropType) {
     CustomInput,
     helperTextStyle,
     inputViewStyle,
+    onChangeField,
   } = props;
   const {colors} = useTheme();
   const Input: any = CustomInput ? CustomInput : TextInput;
+  const onChangeFieldDefault = onChangeField
+    ? onChangeField
+    : (name: string, value: any) => {
+        console.log('onChangeField -> name:', name, 'value:', value);
+      };
 
   useEffect(() => {
     console.log('Render called...', form.errors);
@@ -101,6 +108,7 @@ function FormBuilder(props: FormBuilderPropType) {
       propsInput.watch = form.watch;
       propsInput.triggerValidation = form.triggerValidation || form.trigger;
       propsInput.loadOptions = input.loadOptions;
+      propsInput.onChangeField = onChangeFieldDefault;
     }
 
     if (
@@ -188,6 +196,7 @@ function AppDropdown(props: any) {
     watch,
     triggerValidation,
     Input,
+    onChangeField,
   } = props;
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -261,16 +270,15 @@ function AppDropdown(props: any) {
               <Menu.Item
                 onPress={() => {
                   setValue(name, option.value);
+                  onChangeField(name, option.value);
                   setShowDropdown(false);
                 }}
                 title={
                   <Subheading
                     style={{
-                      ...(
-                        watch(name) === option.value
-                        ? { color: colors.primary }
-                        : {}
-                      )
+                      ...(watch(name) === option.value
+                        ? {color: colors.primary}
+                        : {}),
                     }}>
                     {option.label}
                   </Subheading>
@@ -404,11 +412,9 @@ function AppAutocomplete(props: any) {
                       title={
                         <Subheading
                           style={{
-                            ...(
-                              watch(name) === item.value
-                              ? { color: colors.primary }
-                              : {}
-                            )
+                            ...(watch(name) === item.value
+                              ? {color: colors.primary}
+                              : {}),
                           }}>
                           {item.label}
                         </Subheading>

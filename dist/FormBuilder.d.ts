@@ -25,6 +25,7 @@ declare type FormBuilderPropType = {
     CustomInput?: React.ReactNode;
     helperTextStyle?: TextStyle;
     inputViewStyle?: ViewStyle;
+    onChangeField?: Function;
 };
 declare function FormBuilder(props: FormBuilderPropType): any;
 export default FormBuilder;

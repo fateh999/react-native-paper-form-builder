@@ -3,9 +3,14 @@ import { Controller } from 'react-hook-form';
 import { FlatList, Keyboard, Platform, ScrollView, View, } from 'react-native';
 import React, { Fragment, useEffect, useState } from 'react';
 function FormBuilder(props) {
-    const { form, formConfigArray, children, CustomInput, helperTextStyle, inputViewStyle, } = props;
+    const { form, formConfigArray, children, CustomInput, helperTextStyle, inputViewStyle, onChangeField, } = props;
     const { colors } = useTheme();
     const Input = CustomInput ? CustomInput : TextInput;
+    const onChangeFieldDefault = onChangeField
+        ? onChangeField
+        : (name, value) => {
+            console.log('onChangeField -> name:', name, 'value:', value);
+        };
     useEffect(() => {
         console.log('Render called...', form.errors);
     });
@@ -26,6 +31,7 @@ function FormBuilder(props) {
             propsInput.watch = form.watch;
             propsInput.triggerValidation = form.triggerValidation || form.trigger;
             propsInput.loadOptions = input.loadOptions;
+            propsInput.onChangeField = onChangeFieldDefault;
         }
         if (input.type === 'checkbox' ||
             input.type === 'radio' ||
@@ -84,7 +90,7 @@ function FormBuilder(props) {
 }
 function AppDropdown(props) {
     const { colors } = useTheme();
-    const { mode, options, setValue, name, watch, triggerValidation, Input, } = props;
+    const { mode, options, setValue, name, watch, triggerValidation, Input, onChangeField, } = props;
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const [displayValue, setDisplayValue] = useState('');
@@ -130,11 +136,12 @@ function AppDropdown(props) {
           {filteredOptions.map((option) => (<Fragment key={option.value}>
               <Menu.Item onPress={() => {
         setValue(name, option.value);
+        onChangeField(name, option.value);
         setShowDropdown(false);
     }} title={<Subheading style={{
         ...(watch(name) === option.value
             ? { color: colors.primary }
-            : {})
+            : {}),
     }}>
                     {option.label}
                   </Subheading>} style={{ maxWidth: width }}/>
@@ -206,7 +213,7 @@ function AppAutocomplete(props) {
     }} title={<Subheading style={{
         ...(watch(name) === item.value
             ? { color: colors.primary }
-            : {})
+            : {}),
     }}>
                           {item.label}
                         </Subheading>}/>
