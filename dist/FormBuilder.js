@@ -132,9 +132,9 @@ function AppDropdown(props) {
         setValue(name, option.value);
         setShowDropdown(false);
     }} title={<Subheading style={{
-        color: watch(name) === option.value
-            ? colors.primary
-            : undefined,
+        ...(watch(name) === option.value
+            ? { color: colors.primary }
+            : {})
     }}>
                     {option.label}
                   </Subheading>} style={{ maxWidth: width }}/>

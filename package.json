@@ -1,6 +1,6 @@
 {
-  "name": "react-native-paper-form-builder",
-  "version": "1.0.9",
+  "name": "isatech-react-native-paper-form-builder",
+  "version": "1.0.10",
   "description": "Form builder component using React Native Paper and React Hook Form",
   "files": [
     "dist"
