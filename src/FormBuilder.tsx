@@ -266,10 +266,11 @@ function AppDropdown(props: any) {
                 title={
                   <Subheading
                     style={{
-                      color:
+                      ...(
                         watch(name) === option.value
-                          ? colors.primary
-                          : undefined,
+                        ? { color: colors.primary }
+                        : {}
+                      )
                     }}>
                     {option.label}
                   </Subheading>
