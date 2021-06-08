@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fateh999/react-native-paper-dropdown.git"
+    "url": "git+https://github.com/fateh999/react-native-paper-form-builder.git"
   },
   "keywords": [
-    "Dropdown",
+    "FormBuilder",
     "Material",
-    "Dropdown",
+    "Forms",
     "React",
     "Native",
     "Paper"
@@ -25,9 +25,9 @@
   "author": "Fateh Farooqui",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fateh999/react-native-paper-dropdown/issues"
+    "url": "https://github.com/fateh999/react-native-paper-form-builder/issues"
   },
-  "homepage": "https://github.com/fateh999/react-native-paper-dropdown#readme",
+  "homepage": "https://github.com/fateh999/react-native-paper-form-builder#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -37,8 +37,7 @@
     "react-native-paper": "*"
   },
   "devDependencies": {
-    "tsc": "^1.20150623.0",
-    "typescript": "^3.9.7"
+    "typescript": "^4.3.2"
   },
   "dependencies": {}
 }
