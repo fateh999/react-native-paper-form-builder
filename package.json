@@ -38,13 +38,5 @@
   },
   "devDependencies": {
     "typescript": "^4.3.2"
-  },
-  "dependencies": {
-    "@types/react": "^17.0.10",
-    "@types/react-native": "^0.64.10",
-    "react": "^17.0.2",
-    "react-hook-form": "^7.8.3",
-    "react-native": "^0.64.2",
-    "react-native-paper": "^4.9.1"
   }
 }
