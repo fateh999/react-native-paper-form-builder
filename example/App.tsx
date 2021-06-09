@@ -1,84 +1,41 @@
 import {
+  Appbar,
   DarkTheme,
   DefaultTheme,
   Provider,
-  TextInput,
+  Surface,
   ThemeProvider,
 } from 'react-native-paper';
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
-import FormBuilder from './src/FormBuilder';
-import {useForm} from 'react-hook-form';
+import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import AdvancedExample from './AdvancedExample';
 
 function App() {
-  const [nightMode] = useState(false);
-  const {control, setFocus} = useForm({
-    defaultValues: {
-      name: '',
-    },
-    mode: 'onChange',
-  });
+  const [nightMode, setNightmode] = useState(false);
 
   return (
     <Provider theme={nightMode ? DarkTheme : DefaultTheme}>
       <ThemeProvider theme={nightMode ? DarkTheme : DefaultTheme}>
-        <SafeAreaView style={styles.container}>
-          <ScrollView contentContainerStyle={styles.scrollView}>
-            <FormBuilder
-              theme={{colors: {primary: 'orange'}}}
-              formConfigArray={[
-                {
-                  name: 'name',
-                  control,
-                  setFocus,
-                  type: 'text',
-                  textInputProps: {
-                    label: 'Name',
-                    left: <TextInput.Icon name={'account'} />,
-                  },
-                  rules: {
-                    required: {
-                      value: true,
-                      message: 'Name is required',
-                    },
-                  },
-                },
-                {
-                  name: 'email',
-                  control,
-                  setFocus,
-                  type: 'email',
-                  textInputProps: {
-                    label: 'Email',
-                    left: <TextInput.Icon name={'email'} />,
-                  },
-                  rules: {
-                    required: {
-                      value: true,
-                      message: 'Email is required',
-                    },
-                  },
-                },
-                {
-                  name: 'password',
-                  control,
-                  setFocus,
-                  type: 'password',
-                  textInputProps: {
-                    label: 'Password',
-                    left: <TextInput.Icon name={'lock'} />,
-                  },
-                  rules: {
-                    required: {
-                      value: true,
-                      message: 'Password is required',
-                    },
-                  },
-                },
-              ]}
+        <StatusBar barStyle={'light-content'} />
+        <Surface style={styles.container}>
+          <Appbar.Header>
+            <Appbar.Content title="React Native Paper Form Builder" />
+            <Appbar.Action
+              icon={nightMode ? 'brightness-7' : 'brightness-3'}
+              onPress={() => setNightmode(!nightMode)}
             />
-          </ScrollView>
-        </SafeAreaView>
+          </Appbar.Header>
+          <SafeAreaView style={styles.container}>
+            <KeyboardAwareScrollView
+              enableOnAndroid={false}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.scrollView}
+              keyboardShouldPersistTaps={'handled'}>
+              <AdvancedExample />
+            </KeyboardAwareScrollView>
+          </SafeAreaView>
+        </Surface>
       </ThemeProvider>
     </Provider>
   );

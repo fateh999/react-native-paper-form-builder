@@ -4,8 +4,8 @@ import {
   FieldValues,
   UseFormStateReturn,
 } from 'react-hook-form';
-import {Platform, StyleSheet} from 'react-native';
-import {HelperText, TextInput} from 'react-native-paper';
+import {StyleSheet} from 'react-native';
+import {HelperText, TextInput, useTheme} from 'react-native-paper';
 import {TextInputProps} from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
 
 type InputTextProps = {
@@ -16,30 +16,28 @@ type InputTextProps = {
 
 function InputText(props: InputTextProps) {
   const {formState, field, textInputProps} = props;
+  const theme = useTheme();
   const errorMessage = formState.errors?.[field.name]?.message;
+  const textColor = errorMessage ? theme.colors.error : theme.colors.text;
 
   const styles = useMemo(
     () =>
       StyleSheet.create({
         textInputStyle: {
-          fontSize: 16,
-          paddingHorizontal: 10,
-          paddingBottom: Platform.OS === 'ios' ? 8.3 / 2 : 0,
-          paddingVertical: Platform.OS === 'ios' ? 8.3 / 2 : 0,
-          textAlignVertical: 'center',
+          color: textColor,
         },
       }),
-    [],
+    [textColor],
   );
 
   return (
     <Fragment>
       <TextInput
         mode={'outlined'}
+        error={errorMessage ? true : false}
         {...textInputProps}
         ref={field.ref}
         value={field.value}
-        error={errorMessage ? true : false}
         onChangeText={text => field.onChange(text)}
         style={[styles.textInputStyle, textInputProps?.style]}
       />

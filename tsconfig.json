@@ -16,6 +16,6 @@
     "skipLibCheck": true,
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["./src/FormBuilder.tsx", "./src/KeyboardSpacer.js"],
+  "include": ["./src"],
   "exclude": ["./node_modules", "./example"]
 }
