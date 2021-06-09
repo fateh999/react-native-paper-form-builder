@@ -60,7 +60,6 @@ function AdvancedExample() {
           },
           {
             name: 'password',
-
             type: 'password',
             textInputProps: {
               label: 'Password',

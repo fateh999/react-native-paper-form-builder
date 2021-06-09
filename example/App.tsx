@@ -7,9 +7,16 @@ import {
   ThemeProvider,
 } from 'react-native-paper';
 import React, {useState} from 'react';
-import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+} from 'react-native';
 import AdvancedExample from './AdvancedExample';
+//@ts-ignore
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 function App() {
   const [nightMode, setNightmode] = useState(false);
@@ -17,7 +24,12 @@ function App() {
   return (
     <Provider theme={nightMode ? DarkTheme : DefaultTheme}>
       <ThemeProvider theme={nightMode ? DarkTheme : DefaultTheme}>
-        <StatusBar barStyle={'light-content'} />
+        <StatusBar
+          backgroundColor={
+            nightMode ? DarkTheme.colors.surface : DefaultTheme.colors.primary
+          }
+          barStyle={'light-content'}
+        />
         <Surface style={styles.container}>
           <Appbar.Header>
             <Appbar.Content title="React Native Paper Form Builder" />
@@ -27,13 +39,13 @@ function App() {
             />
           </Appbar.Header>
           <SafeAreaView style={styles.container}>
-            <KeyboardAwareScrollView
-              enableOnAndroid={false}
+            <ScrollView
               showsVerticalScrollIndicator={false}
-              contentContainerStyle={styles.scrollView}
+              style={styles.scrollView}
               keyboardShouldPersistTaps={'handled'}>
               <AdvancedExample />
-            </KeyboardAwareScrollView>
+            </ScrollView>
+            {Platform.OS === 'ios' && <KeyboardSpacer />}
           </SafeAreaView>
         </Surface>
       </ThemeProvider>
@@ -48,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {
-    flex: 1,
+    flexGrow: 1,
     padding: 20,
   },
 });

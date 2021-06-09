@@ -20,7 +20,8 @@ For maintainability this library will only target latest versions of react-hook-
 
 #### Demo :
 
-![](https://i.ibb.co/C6RDdC2/ezgif-7-c021a6c1fa26.gif)
+![](iOS.gif)
+![](android.gif)
 
 #### Steps to install :
 
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
 export default BasicExample;
 ```
 
-#### For More Advanced Example as in the Demo check [App.tsx](Example/App.tsx)
+#### For More Advanced Example as in the Demo check [App.tsx](example/App.tsx)
 
 #### Props:
 

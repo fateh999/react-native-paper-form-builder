@@ -16,17 +16,7 @@ function InputSelect(props) {
         menuStyle: {
             minWidth: width,
             width: width,
-            backgroundColor: theme.colors.surface,
-            borderRadius: 0,
             marginTop: height,
-            shadowOpacity: 0.0015 * 10 + 0.18,
-            shadowRadius: 0.54 * 10,
-            shadowOffset: {
-                height: 0.6 * 10,
-                width: 0.6 * 10,
-            },
-            shadowColor: theme.colors.onSurface,
-            elevation: 5,
         },
     }), [height, textColor, theme.colors.onSurface, theme.colors.surface, width]);
     const onLayout = useCallback((event) => {
