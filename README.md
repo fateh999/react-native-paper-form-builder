@@ -126,8 +126,10 @@ export default BasicExample;
 #### Props:
 
 ```javascript
-export type $DeepPartial<T> = {[P in keyof T]?: $DeepPartial<T[P]>};
-export type FormBuilderProps = {
+
+type $DeepPartial<T> = {[P in keyof T]?: $DeepPartial<T[P]>};
+
+type FormBuilderProps = {
   formConfigArray: Array<Omit<LogicProps, 'control'>>;
   inputSpacing?: number;
   theme?: $DeepPartial<Theme>;
@@ -135,18 +137,17 @@ export type FormBuilderProps = {
   setFocus: (name: any) => void;
 };
 
-export type INPUT_TYPES =
+type INPUT_TYPES =
   | 'text'
   | 'email'
   | 'password'
   | 'select'
-  | 'date'
   | 'custom'
   | 'autocomplete';
 
-export type OPTIONS = Array<{label: string; value: string | number}>;
+type OPTIONS = Array<{label: string; value: string | number}>;
 
-export type LogicProps = {
+type LogicProps = {
   name: string;
   rules?: Omit<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>;
   shouldUnregister?: boolean;
@@ -160,7 +161,7 @@ export type LogicProps = {
   CustomAutoComplete?: typeof AutoComplete;
 };
 
-export type InputAutocompleteProps = {
+type InputAutocompleteProps = {
   field: ControllerRenderProps<FieldValues, string>;
   formState: UseFormStateReturn<FieldValues>;
   textInputProps?: Omit<TextInputProps, 'theme'>;
@@ -168,7 +169,7 @@ export type InputAutocompleteProps = {
   CustomAutoComplete?: typeof AutoComplete;
 };
 
-export type AutoCompleteProps = {
+type AutoCompleteProps = {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   textInputProps?: Omit<TextInputProps, 'theme'>;
@@ -176,10 +177,11 @@ export type AutoCompleteProps = {
   field: ControllerRenderProps<FieldValues, string>;
 };
 
-export type InputSelectProps = {
+type InputSelectProps = {
   field: ControllerRenderProps<FieldValues, string>;
   formState: UseFormStateReturn<FieldValues>;
   textInputProps?: Omit<TextInputProps, 'theme'>;
   options: OPTIONS;
 };
+
 ```
