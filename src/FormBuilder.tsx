@@ -6,7 +6,13 @@ import {FormBuilderProps} from './Types/Types';
 
 function FormBuilder(props: FormBuilderProps) {
   const currentTheme = useTheme();
-  const {formConfigArray, theme = currentTheme, control, setFocus} = props;
+  const {
+    formConfigArray,
+    theme = currentTheme,
+    control,
+    setFocus,
+    inputSpacing,
+  } = props;
 
   return (
     <Fragment>
@@ -34,7 +40,7 @@ function FormBuilder(props: FormBuilderProps) {
               ...item.textInputProps,
             }}
           />
-          <View style={{height: item?.inputSpacing ?? 15}} />
+          <View style={{height: item?.inputSpacing ?? inputSpacing ?? 15}} />
         </Fragment>
       ))}
     </Fragment>

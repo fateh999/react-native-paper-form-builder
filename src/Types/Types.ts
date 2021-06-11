@@ -26,7 +26,6 @@ export type INPUT_TYPES =
   | 'email'
   | 'password'
   | 'select'
-  | 'date'
   | 'custom'
   | 'autocomplete';
 
