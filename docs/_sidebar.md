@@ -1,3 +1,4 @@
 - [Home](README.md)
 - [Examples](examples.md)
 - [Usage](usage.md)
+- [Props](props.md)

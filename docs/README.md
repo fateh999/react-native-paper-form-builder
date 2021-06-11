@@ -2,10 +2,14 @@
 
 Form Builder written in typescript with inbuilt Validation, dropdown, autocomplete powered by [react-hook-form](https://react-hook-form.com/) & [react-native-paper](https://callstack.github.io/react-native-paper/).
 
-[![NPM](https://nodei.co/npm/react-native-paper-form-builder.png?downloads=true)](https://nodei.co/npm/react-native-paper-form-builder/)
-
 ```sh
 yarn add react-native-paper-form-builder
+```
+
+or
+
+```sh
+npm install react-native-paper-form-builder
 ```
 
 ## Peer Dependencies to Install :
