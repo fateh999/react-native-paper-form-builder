@@ -1,18 +1,18 @@
 # react-native-paper-form-builder
 
-# This is readme file for version 2+, For v1 doc go to this [link](READMEv1.md)
+#### This is readme file for version 2+, For v1 doc go to this [link](READMEv1.md)
+
+[![npm downloads](https://img.shields.io/npm/dm/react-native-paper-form-builder.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-paper-form-builder)
+[![npm](https://img.shields.io/npm/dt/react-native-paper-form-builder.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-paper-form-builder)
+[![npm](https://img.shields.io/npm/l/react-native-paper-form-builder?style=for-the-badge)](https://github.com/fateh999/react-native-paper-form-builder/blob/master/LICENSE)
 
 Form Builder written in typescript with inbuilt Validation, dropdown, autocomplete powered by [react-hook-form](https://react-hook-form.com/) & [react-native-paper](https://callstack.github.io/react-native-paper/).
-
-[![NPM](https://nodei.co/npm/react-native-paper-form-builder.png?downloads=true)](https://nodei.co/npm/react-native-paper-form-builder/)
 
 #### Dependencies to Install :
 
 - [react-native-paper](https://www.npmjs.com/package/react-native-paper)
 
 - [react-hook-form](https://www.npmjs.com/package/react-hook-form)
-
-- [react-native-vector-icons](https://www.npmjs.com/package/react-native-vector-icons) Follow the configuration step of react-native-vector-icons as provided in the docs.
 
 #### Note :
 
