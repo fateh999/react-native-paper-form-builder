@@ -18,14 +18,14 @@ Form Builder written in typescript with inbuilt Validation, dropdown, autocomple
 
 For maintainability this library will only target latest versions of react-hook-form and react-native-paper.
 
+#### Documentation :
+
+- [https://fateh999.github.io/react-native-paper-form-builder](https://fateh999.github.io/react-native-paper-form-builder)
+
 #### Demo :
 
 ![](iOS.gif)
 ![](android.gif)
-
-#### Documentation :
-
-![https://fateh999.github.io/react-native-paper-form-builder](https://fateh999.github.io/react-native-paper-form-builder)
 
 #### Steps to install :
 
