@@ -7,7 +7,8 @@ import {LogicProps} from './dist/Types/Types';
 function AdvancedExample() {
   const {control, setFocus, handleSubmit} = useForm({
     defaultValues: {
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
       city: '',
@@ -23,24 +24,38 @@ function AdvancedExample() {
         control={control}
         setFocus={setFocus}
         formConfigArray={[
-          {
-            name: 'name',
-
-            type: 'text',
-            textInputProps: {
-              label: 'Name',
-              left: <TextInput.Icon name={'account'} />,
-            },
-            rules: {
-              required: {
-                value: true,
-                message: 'Name is required',
+          [
+            {
+              name: 'firstName',
+              type: 'text',
+              textInputProps: {
+                label: 'First Name',
+                left: <TextInput.Icon name={'account'} />,
+              },
+              rules: {
+                required: {
+                  value: true,
+                  message: 'First name is required',
+                },
               },
             },
-          },
+            {
+              name: 'lastName',
+              type: 'text',
+              textInputProps: {
+                label: 'Last Name',
+                left: <TextInput.Icon name={'account'} />,
+              },
+              rules: {
+                required: {
+                  value: true,
+                  message: 'Last name is required',
+                },
+              },
+            },
+          ],
           {
             name: 'email',
-
             type: 'email',
             textInputProps: {
               label: 'Email',
@@ -82,7 +97,6 @@ function AdvancedExample() {
           },
           {
             name: 'city',
-
             type: 'autocomplete',
             textInputProps: {
               label: 'City',
@@ -131,7 +145,6 @@ function AdvancedExample() {
           },
           {
             name: 'gender',
-
             type: 'select',
             textInputProps: {
               label: 'Gender',

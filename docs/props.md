@@ -1,10 +1,12 @@
 ```javascript
 
 type $DeepPartial<T> = {[P in keyof T]?: $DeepPartial<T[P]>};
-
 type FormBuilderProps = {
-  formConfigArray: Array<Omit<LogicProps, 'control'>>;
+  formConfigArray: Array<
+    Omit<LogicProps, 'control'> | Array<Omit<LogicProps, 'control'>>
+  >;
   inputSpacing?: number;
+  inputSpacingHorizontal?: number;
   theme?: $DeepPartial<Theme>;
   control: Control<any>;
   setFocus: (name: any) => void;
@@ -31,6 +33,7 @@ type LogicProps = {
   control: Control<any>;
   JSX?: typeof Logic;
   inputSpacing?: number;
+  inputSpacingHorizontal?: number;
   CustomAutoComplete?: typeof AutoComplete;
 };
 

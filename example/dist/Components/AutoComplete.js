@@ -28,13 +28,13 @@ function AutoComplete(props) {
           <View style={styles.searchStyle}>
             <Searchbar value={search} onChangeText={setSearch} placeholder={`Search ${textInputProps?.label ?? ''}`}/>
           </View>
-          <FlatList data={options.filter(option => option.label.toLowerCase().indexOf(search.toLowerCase()) !== -1)} renderItem={({ item }) => (<List.Item title={item.label} onPress={() => {
+          <FlatList data={options.filter((option) => option.label.toLowerCase().indexOf(search.toLowerCase()) !== -1)} renderItem={({ item }) => (<List.Item title={item.label} onPress={() => {
                 setSelectedValue(`${item.value}`);
             }} titleStyle={{
                 color: `${item.value}` === selectedValue
                     ? theme.colors.primary
                     : theme.colors.text,
-            }}/>)} ItemSeparatorComponent={() => <Divider />} keyExtractor={item => `${item.value}`}/>
+            }}/>)} ItemSeparatorComponent={() => <Divider />} keyExtractor={(item) => `${item.value}`}/>
         </SafeAreaView>
       </Surface>
     </Modal>);

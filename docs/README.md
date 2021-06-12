@@ -26,3 +26,11 @@ npm install react-native-paper-form-builder
 
 ![](https://github.com/fateh999/react-native-paper-form-builder/raw/master/iOS.gif)
 ![](https://github.com/fateh999/react-native-paper-form-builder/raw/master/android.gif)
+
+## What's New in v2.0.4:
+
+- Create column layout in FormBuilder like shown below
+  ![](https://github.com/fateh999/react-native-paper-form-builder/raw/master/newIOS.png)
+  ![](https://github.com/fateh999/react-native-paper-form-builder/raw/master/newAndroid.png)
+
+- Use custom input.

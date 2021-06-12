@@ -11,13 +11,14 @@ import {
 import {InputSelectProps} from '../Types/Types';
 
 function InputSelect(props: InputSelectProps) {
-  const {formState, field, textInputProps, options} = props;
+  const {formState, field, textInputProps, options, CustomTextInput} = props;
   const theme = useTheme();
   const errorMessage = formState.errors?.[field.name]?.message;
   const textColor = errorMessage ? theme.colors.error : theme.colors.text;
   const [visible, setVisible] = useState(false);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+  const INPUT = CustomTextInput ?? TextInput;
 
   const styles = useMemo(
     () =>
@@ -53,7 +54,7 @@ function InputSelect(props: InputSelectProps) {
               setVisible(true);
             }}>
             <View pointerEvents={'none'} onLayout={onLayout}>
-              <TextInput
+              <INPUT
                 ref={field.ref}
                 mode={'outlined'}
                 error={errorMessage ? true : false}

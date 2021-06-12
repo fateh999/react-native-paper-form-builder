@@ -53,7 +53,7 @@ function AutoComplete(props: AutoCompleteProps) {
           </View>
           <FlatList
             data={options.filter(
-              option =>
+              (option) =>
                 option.label.toLowerCase().indexOf(search.toLowerCase()) !== -1,
             )}
             renderItem={({item}) => (
@@ -71,7 +71,7 @@ function AutoComplete(props: AutoCompleteProps) {
               />
             )}
             ItemSeparatorComponent={() => <Divider />}
-            keyExtractor={item => `${item.value}`}
+            keyExtractor={(item) => `${item.value}`}
           />
         </SafeAreaView>
       </Surface>

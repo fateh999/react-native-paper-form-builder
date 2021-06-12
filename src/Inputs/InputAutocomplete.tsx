@@ -10,12 +10,20 @@ import AutoComplete from '../Components/AutoComplete';
 import {InputAutocompleteProps} from '../Types/Types';
 
 function InputAutocomplete(props: InputAutocompleteProps) {
-  const {formState, field, textInputProps, options, CustomAutoComplete} = props;
+  const {
+    formState,
+    field,
+    textInputProps,
+    options,
+    CustomAutoComplete,
+    CustomTextInput,
+  } = props;
   const theme = useTheme();
   const errorMessage = formState.errors?.[field.name]?.message;
   const textColor = errorMessage ? theme.colors.error : theme.colors.text;
   const [visible, setVisible] = useState(false);
   const AUTOCOMPLETE = CustomAutoComplete ?? AutoComplete;
+  const INPUT = CustomTextInput ?? TextInput;
 
   const styles = useMemo(
     () =>
@@ -35,7 +43,7 @@ function InputAutocomplete(props: InputAutocompleteProps) {
           setVisible(true);
         }}>
         <View pointerEvents={'none'}>
-          <TextInput
+          <INPUT
             ref={field.ref}
             mode={'outlined'}
             error={errorMessage ? true : false}

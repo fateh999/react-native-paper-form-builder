@@ -18,6 +18,7 @@ function Logic(props: LogicProps) {
     JSX,
     options,
     CustomAutoComplete,
+    CustomTextInput,
   } = props;
   const {field, formState} = useController({
     name,
@@ -34,6 +35,7 @@ function Logic(props: LogicProps) {
           field={field}
           formState={formState}
           textInputProps={textInputProps}
+          CustomTextInput={CustomTextInput}
         />
       );
     }
@@ -47,6 +49,7 @@ function Logic(props: LogicProps) {
             keyboardType: 'email-address',
             autoCapitalize: 'none',
           }}
+          CustomTextInput={CustomTextInput}
         />
       );
     }
@@ -59,6 +62,7 @@ function Logic(props: LogicProps) {
             ...textInputProps,
             secureTextEntry: true,
           }}
+          CustomTextInput={CustomTextInput}
         />
       );
     }
@@ -74,6 +78,7 @@ function Logic(props: LogicProps) {
                 right: <TextInput.Icon name={'menu-down'} />,
               }}
               options={options}
+              CustomTextInput={CustomTextInput}
             />
           )}
         </Fragment>
@@ -92,6 +97,7 @@ function Logic(props: LogicProps) {
               }}
               options={options}
               CustomAutoComplete={CustomAutoComplete}
+              CustomTextInput={CustomTextInput}
             />
           )}
         </Fragment>
