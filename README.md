@@ -47,7 +47,7 @@ yarn add react-native-paper-form-builder
 import {FormBuilder} from 'react-native-paper-form-builder';
 ```
 
-## What's New in v2.0.4:
+#### What's New in v2.0.4:
 
 - Create column layout in FormBuilder like shown below
   ![](newIOS.png)
