@@ -73,6 +73,7 @@ export type InputSelectProps = {
   textInputProps?: ComponentProps<typeof TextInput>;
   options: OPTIONS;
   CustomTextInput?: any;
+  onDismiss?: () => void;
 };
 
 export type InputTextProps = {

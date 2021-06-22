@@ -11,7 +11,7 @@ import {
 import {InputSelectProps} from '../Types/Types';
 
 function InputSelect(props: InputSelectProps) {
-  const {formState, field, textInputProps, options, CustomTextInput} = props;
+  const {formState, field, textInputProps, options, CustomTextInput, onDismiss} = props;
   const theme = useTheme();
   const errorMessage = formState.errors?.[field.name]?.message;
   const textColor = errorMessage ? theme.colors.error : theme.colors.text;
@@ -45,7 +45,7 @@ function InputSelect(props: InputSelectProps) {
     <Fragment>
       <Menu
         visible={visible}
-        onDismiss={() => {}}
+        onDismiss={onDismiss}
         style={styles.menuStyle}
         anchor={
           <TouchableRipple
