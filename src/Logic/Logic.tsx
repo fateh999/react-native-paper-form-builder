@@ -19,6 +19,7 @@ function Logic(props: LogicProps) {
     options,
     CustomAutoComplete,
     CustomTextInput,
+    onDismiss,
   } = props;
   const {field, formState} = useController({
     name,
@@ -79,6 +80,7 @@ function Logic(props: LogicProps) {
               }}
               options={options}
               CustomTextInput={CustomTextInput}
+              onDismiss={onDismiss}
             />
           )}
         </Fragment>
