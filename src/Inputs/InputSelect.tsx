@@ -68,6 +68,7 @@ function InputSelect(props: InputSelectProps) {
                   setVisible(true);
                 }}
                 style={[styles.textInputStyle, textInputProps?.style]}
+                onPress={onDismiss}
               />
             </View>
           </TouchableRipple>
