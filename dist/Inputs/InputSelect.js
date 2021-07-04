@@ -2,7 +2,7 @@ import React, { Fragment, useCallback, useMemo, useState } from 'react';
 import { Keyboard, StyleSheet, View } from 'react-native';
 import { Menu, TouchableRipple, useTheme, TextInput, Divider, HelperText, } from 'react-native-paper';
 function InputSelect(props) {
-    const { formState, field, textInputProps, options, CustomTextInput } = props;
+    const { formState, field, textInputProps, options, CustomTextInput, onDismiss = () => { }, } = props;
     const theme = useTheme();
     const errorMessage = formState.errors?.[field.name]?.message;
     const textColor = errorMessage ? theme.colors.error : theme.colors.text;
@@ -26,7 +26,7 @@ function InputSelect(props) {
         setHeight(_height);
     }, []);
     return (<Fragment>
-      <Menu visible={visible} onDismiss={() => { }} style={styles.menuStyle} anchor={<TouchableRipple onPress={() => {
+      <Menu visible={visible} onDismiss={onDismiss} style={styles.menuStyle} anchor={<TouchableRipple onPress={() => {
                 Keyboard.dismiss();
                 setVisible(true);
             }}>
@@ -35,7 +35,7 @@ function InputSelect(props) {
                 ?.label} onFocus={() => {
                 Keyboard.dismiss();
                 setVisible(true);
-            }} style={[styles.textInputStyle, textInputProps?.style]}/>
+            }} style={[styles.textInputStyle, textInputProps?.style]} onPress={onDismiss}/>
             </View>
           </TouchableRipple>}>
         {options.map(({ label: _label, value: _value }, _index) => {

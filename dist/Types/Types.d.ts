@@ -35,6 +35,7 @@ export declare type LogicProps = {
     inputSpacingHorizontal?: number;
     CustomAutoComplete?: typeof AutoComplete;
     CustomTextInput?: any;
+    onDismiss?: () => void;
 };
 export declare type InputAutocompleteProps = {
     field: ControllerRenderProps<FieldValues, string>;
@@ -57,6 +58,7 @@ export declare type InputSelectProps = {
     textInputProps?: ComponentProps<typeof TextInput>;
     options: OPTIONS;
     CustomTextInput?: any;
+    onDismiss?: () => void;
 };
 export declare type InputTextProps = {
     field: ControllerRenderProps<FieldValues, string>;

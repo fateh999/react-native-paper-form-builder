@@ -5,7 +5,7 @@ import InputAutocomplete from '../Inputs/InputAutocomplete';
 import InputSelect from '../Inputs/InputSelect';
 import InputText from '../Inputs/InputText';
 function Logic(props) {
-    const { name, rules, shouldUnregister, defaultValue, control, type, textInputProps, JSX, options, CustomAutoComplete, CustomTextInput, } = props;
+    const { name, rules, shouldUnregister, defaultValue, control, type, textInputProps, JSX, options, CustomAutoComplete, CustomTextInput, onDismiss, } = props;
     const { field, formState } = useController({
         name,
         rules,
@@ -35,7 +35,7 @@ function Logic(props) {
           {options && (<InputSelect field={field} formState={formState} textInputProps={{
                         ...textInputProps,
                         right: <TextInput.Icon name={'menu-down'}/>,
-                    }} options={options} CustomTextInput={CustomTextInput}/>)}
+                    }} options={options} CustomTextInput={CustomTextInput} onDismiss={onDismiss}/>)}
         </Fragment>);
         }
         case 'autocomplete': {
