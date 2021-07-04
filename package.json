@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper-form-builder",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Form builder component using React Native Paper and React Hook Form",
   "files": [
     "dist"

@@ -37,6 +37,7 @@ type LogicProps = {
   inputSpacingHorizontal?: number;
   CustomAutoComplete?: typeof AutoComplete;
   CustomTextInput?: any;
+  onDismiss?: () => void;
 };
 
 type InputAutocompleteProps = {
