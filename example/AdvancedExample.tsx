@@ -1,8 +1,8 @@
 import React, {Fragment} from 'react';
 import {useController, useForm} from 'react-hook-form';
 import {Button, Checkbox, List, TextInput} from 'react-native-paper';
-import {FormBuilder} from './dist';
-import {LogicProps} from './dist/Types/Types';
+import {FormBuilder} from 'react-native-paper-form-builder';
+import {LogicProps} from 'react-native-paper-form-builder/dist/Types/Types';
 
 function AdvancedExample() {
   const {control, setFocus, handleSubmit} = useForm({
