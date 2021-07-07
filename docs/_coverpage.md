@@ -1,4 +1,4 @@
-# react-native-paper-form-builder <small>2.0.9</small>
+# react-native-paper-form-builder
 
 > React Native Paper Form Builder.
 

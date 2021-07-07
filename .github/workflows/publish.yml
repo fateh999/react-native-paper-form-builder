@@ -16,6 +16,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - run: npx i-peers
+      - run: npm run build
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
