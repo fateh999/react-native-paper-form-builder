@@ -45,7 +45,7 @@ function InputSelect(props: InputSelectProps) {
     <Fragment>
       <Menu
         visible={visible}
-        onDismiss={onDismiss}
+        onDismiss={() => setVisible(false)}
         style={styles.menuStyle}
         anchor={
           <TouchableRipple
