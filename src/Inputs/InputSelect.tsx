@@ -68,7 +68,6 @@ function InputSelect(props: InputSelectProps) {
                   setVisible(true);
                 }}
                 style={[styles.textInputStyle, textInputProps?.style]}
-                onPress={onDismiss}
               />
             </View>
           </TouchableRipple>
@@ -82,6 +81,7 @@ function InputSelect(props: InputSelectProps) {
                 onPress={() => {
                   field.onChange(`${_value}`);
                   setVisible(false);
+                  !!onDismiss && onDismiss();
                 }}
                 titleStyle={{
                   color:
