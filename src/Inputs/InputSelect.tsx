@@ -52,7 +52,7 @@ function InputSelect(props: InputSelectProps) {
     <Fragment>
       <Menu
         visible={visible}
-        onDismiss={onDismiss}
+        onDismiss={() => setVisible(false)}
         style={styles.menuStyle}
         anchor={
           <TouchableRipple
@@ -75,7 +75,6 @@ function InputSelect(props: InputSelectProps) {
                   setVisible(true);
                 }}
                 style={[styles.textInputStyle, textInputProps?.style]}
-                onPress={onDismiss}
               />
             </View>
           </TouchableRipple>
@@ -89,6 +88,7 @@ function InputSelect(props: InputSelectProps) {
                 onPress={() => {
                   field.onChange(`${_value}`);
                   setVisible(false);
+                  !!onDismiss && onDismiss();
                 }}
                 titleStyle={{
                   color:
