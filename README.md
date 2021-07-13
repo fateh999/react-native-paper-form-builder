@@ -2,6 +2,7 @@
 
 #### This is readme file for version 2+, For v1 doc go to this [link](READMEv1.md)
 
+[![npm version](https://img.shields.io/npm/v/react-native-paper-form-builder.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-paper-form-builder)
 [![npm downloads](https://img.shields.io/npm/dm/react-native-paper-form-builder.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-paper-form-builder)
 [![npm](https://img.shields.io/npm/dt/react-native-paper-form-builder.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-paper-form-builder)
 [![npm](https://img.shields.io/npm/l/react-native-paper-form-builder?style=for-the-badge)](https://github.com/fateh999/react-native-paper-form-builder/blob/master/LICENSE)
