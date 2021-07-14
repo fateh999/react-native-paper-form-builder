@@ -135,3 +135,5 @@ export default BasicExample;
 ```
 
 #### For More Advanced Example as in the Demo check [App.tsx](example/App.tsx)
+
+<p><a href="https://www.buymeacoffee.com/fateh999"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="fateh999" /></a></p><br><br><br>
