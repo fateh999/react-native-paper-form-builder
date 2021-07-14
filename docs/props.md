@@ -8,7 +8,7 @@ type FormBuilderProps = {
   inputSpacing?: number;
   inputSpacingHorizontal?: number;
   theme?: $DeepPartial<Theme> | Theme;
-  control: Control<any>;
+  control: any;
   setFocus: (name: any) => void;
   CustomTextInput?: any;
 };
@@ -31,10 +31,11 @@ type LogicProps = {
   type: INPUT_TYPES;
   textInputProps?: ComponentProps<typeof TextInput>;
   options?: OPTIONS;
-  control: Control<any>;
+  control: any;
   JSX?: typeof Logic;
   inputSpacing?: number;
   inputSpacingHorizontal?: number;
+  flex?: number;
   CustomAutoComplete?: typeof AutoComplete;
   CustomTextInput?: any;
   onDismiss?: () => void;
@@ -63,6 +64,7 @@ type InputSelectProps = {
   textInputProps?: ComponentProps<typeof TextInput>;
   options: OPTIONS;
   CustomTextInput?: any;
+  onDismiss?: () => void;
 };
 
 type InputTextProps = {
@@ -71,5 +73,4 @@ type InputTextProps = {
   textInputProps?: ComponentProps<typeof TextInput>;
   CustomTextInput?: any;
 };
-
 ```
