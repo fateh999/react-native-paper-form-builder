@@ -38,6 +38,7 @@ function AdvancedExample() {
                   message: 'First name is required',
                 },
               },
+              flex: 1.5,
             },
             {
               name: 'lastName',
@@ -52,6 +53,7 @@ function AdvancedExample() {
                   message: 'Last name is required',
                 },
               },
+              flex: 1,
             },
           ],
           {

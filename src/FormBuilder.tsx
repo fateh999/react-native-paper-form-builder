@@ -45,9 +45,6 @@ function FormBuilder(props: FormBuilderProps) {
         rowStyle: {
           flexDirection: 'row',
         },
-        columnStyle: {
-          flex: 1,
-        },
       }),
     [],
   );
@@ -83,9 +80,10 @@ function FormBuilder(props: FormBuilderProps) {
                   <View
                     key={`${index} + ${_index}`}
                     style={[
-                      styles.columnStyle,
                       {
                         marginRight: horizontalSpacing,
+                        flex: _item.flex ?? 1,
+                        overflow: 'hidden',
                       },
                     ]}>
                     <Logic
