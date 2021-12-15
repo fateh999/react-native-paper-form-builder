@@ -58,7 +58,9 @@ function InputSelect(props: InputSelectProps) {
           <TouchableRipple
             onPress={() => {
               Keyboard.dismiss();
-              setVisible(true);
+              if (!textInputProps.disabled) {
+                setVisible(true);
+              }
             }}>
             <View pointerEvents={'none'} onLayout={onLayout}>
               <INPUT
@@ -72,7 +74,9 @@ function InputSelect(props: InputSelectProps) {
                 }
                 onFocus={() => {
                   Keyboard.dismiss();
-                  setVisible(true);
+                  if (!textInputProps.disabled) {
+                    setVisible(true);
+                  }
                 }}
                 style={[styles.textInputStyle, textInputProps?.style]}
               />
