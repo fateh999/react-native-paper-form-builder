@@ -32,9 +32,13 @@ function AutoComplete(props: AutoCompleteProps) {
     <Modal visible={visible} onDismiss={() => setVisible(false)}>
       <Surface style={styles.containerStyle}>
         <Appbar.Header>
-          <Appbar.Action icon={'close'} onPress={() => setVisible(false)} />
+          <Appbar.Action 
+            testID={`${ props.textInputProps?.testID }Close`}
+            icon={'close'}
+            onPress={() => setVisible(false)} />
           <Appbar.Content title={textInputProps?.label} />
           <Appbar.Action
+            testID={`${ props.textInputProps?.testID }Check`}
             icon={'check'}
             disabled={!selectedValue}
             onPress={() => {
@@ -46,9 +50,10 @@ function AutoComplete(props: AutoCompleteProps) {
         <SafeAreaView style={styles.containerStyle}>
           <View style={styles.searchStyle}>
             <Searchbar
+              testID={`${ props.textInputProps?.testID }SearchBar`}
               value={search}
               onChangeText={setSearch}
-              placeholder={`Search ${textInputProps?.label ?? ''}`}
+              placeholder={props.textInputProps?.placeholder ? props.textInputProps.placeholder : `Search ${ textInputProps?.label ?? "" }`}
             />
           </View>
           <FlatList
