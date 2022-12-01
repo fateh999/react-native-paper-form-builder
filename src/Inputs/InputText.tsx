@@ -19,13 +19,14 @@ function InputText(props: InputTextProps) {
       }),
     [textColor],
   );
-
+const convertToBoolean = (val) => (val === "true" || val === "True" || val === "TRUE" || val == "1");
   return (
     <Fragment>
       <INPUT
         mode={'outlined'}
         error={errorMessage ? true : false}
         {...textInputProps}
+        multiline={convertToBoolean(textInputProps?.multiline)} 
         ref={field.ref}
         value={field.value}
         onChangeText={(text) => field.onChange(text)}
