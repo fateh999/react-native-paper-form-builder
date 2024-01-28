@@ -11,7 +11,8 @@ import {
 import {AutoCompleteProps} from '../Types/Types';
 
 function AutoComplete(props: AutoCompleteProps) {
-  const {visible, setVisible, textInputProps, options, field} = props;
+  const {visible, setVisible, textInputProps, options, field, autoDismiss} =
+    props;
   const theme = useTheme();
   const styles = useMemo(
     () =>
@@ -32,13 +33,14 @@ function AutoComplete(props: AutoCompleteProps) {
     <Modal visible={visible} onDismiss={() => setVisible(false)}>
       <Surface style={styles.containerStyle}>
         <Appbar.Header>
-          <Appbar.Action 
-            testID={`${ props.textInputProps?.testID }Close`}
+          <Appbar.Action
+            testID={`${props.textInputProps?.testID}Close`}
             icon={'close'}
-            onPress={() => setVisible(false)} />
+            onPress={() => setVisible(false)}
+          />
           <Appbar.Content title={textInputProps?.label} />
           <Appbar.Action
-            testID={`${ props.textInputProps?.testID }Check`}
+            testID={`${props.textInputProps?.testID}Check`}
             icon={'check'}
             disabled={!selectedValue}
             onPress={() => {
@@ -50,10 +52,14 @@ function AutoComplete(props: AutoCompleteProps) {
         <SafeAreaView style={styles.containerStyle}>
           <View style={styles.searchStyle}>
             <Searchbar
-              testID={`${ props.textInputProps?.testID }SearchBar`}
+              testID={`${props.textInputProps?.testID}SearchBar`}
               value={search}
               onChangeText={setSearch}
-              placeholder={props.textInputProps?.placeholder ? props.textInputProps.placeholder : `Search ${ textInputProps?.label ?? "" }`}
+              placeholder={
+                props.textInputProps?.placeholder
+                  ? props.textInputProps.placeholder
+                  : `Search ${textInputProps?.label ?? ''}`
+              }
             />
           </View>
           <FlatList
@@ -66,6 +72,10 @@ function AutoComplete(props: AutoCompleteProps) {
                 title={item.label}
                 onPress={() => {
                   setSelectedValue(`${item.value}`);
+                  if (autoDismiss) {
+                    field.onChange(`${item.value}`);
+                    setVisible(false);
+                  }
                 }}
                 titleStyle={{
                   color:

@@ -59,6 +59,7 @@ export type InputAutocompleteProps = {
   options: OPTIONS;
   CustomAutoComplete?: typeof AutoComplete;
   CustomTextInput?: any;
+  autoDismiss?: boolean;
 };
 
 export type AutoCompleteProps = {
@@ -67,6 +68,7 @@ export type AutoCompleteProps = {
   textInputProps?: ComponentProps<typeof TextInput>;
   options: OPTIONS;
   field: ControllerRenderProps<FieldValues, string>;
+  autoDismiss: boolean;
 };
 
 export type InputSelectProps = {

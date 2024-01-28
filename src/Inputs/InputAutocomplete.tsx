@@ -17,11 +17,13 @@ function InputAutocomplete(props: InputAutocompleteProps) {
     options,
     CustomAutoComplete,
     CustomTextInput,
+    autoDismiss,
   } = props;
   const theme = useTheme();
   const errorMessage = formState.errors?.[field.name]?.message;
   const textColor = errorMessage ? theme.colors.error : theme.colors.text;
   const [visible, setVisible] = useState(false);
+  const dismiss = autoDismiss ?? false;
   const AUTOCOMPLETE = CustomAutoComplete ?? AutoComplete;
   const INPUT = CustomTextInput ?? TextInput;
 
@@ -65,6 +67,7 @@ function InputAutocomplete(props: InputAutocompleteProps) {
         options={options}
         field={field}
         textInputProps={textInputProps}
+        autoDismiss={dismiss}
       />
       {errorMessage && <HelperText type={'error'}>{errorMessage}</HelperText>}
     </Fragment>
